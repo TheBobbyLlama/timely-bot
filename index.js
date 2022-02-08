@@ -93,7 +93,7 @@ client.on("interactionCreate", async interaction => {
 
 client.on("messageCreate", async message => {
 	try {
-		const finds = message.content.match(/(([1-9]|10|11|12)(:[0-5][0-9])?\s?[aApP][mM])|(([1-9]|10|11|12):[0-5][0-9])/g);
+		const finds = message.content.match(/\b(([1-9]|10|11|12)(:[0-5][0-9])?\s?[aApP][mM])|\b(([1-9]|10|11|12):[0-5][0-9])/g);
 
 		if (finds?.length) {
 			const tzResult = await getUserTimezone(message.author.id);
