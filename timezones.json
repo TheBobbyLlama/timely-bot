@@ -1,0 +1,122 @@
+[
+	{
+		"value": "X",
+		"label": "[UTC-11] American Samoa",
+		"offset": -11
+	},
+	{
+		"value": "W",
+		"label": "[UTC-10] Hawaii",
+		"offset": -10
+	},
+	{
+		"value": "V",
+		"label": "[UTC-9] Alaska (Anchorage)",
+		"offset": -9
+	},
+	{
+		"value": "U",
+		"label": "[UTC-8] US Pacific (Los Angeles)",
+		"offset": -8
+	},
+	{
+		"value": "T",
+		"label": "[UTC-7] US Mountain (Denver)",
+		"offset": -7
+	},
+	{
+		"value": "S",
+		"label": "[UTC-6] US Central (Chicago)",
+		"offset": -6
+	},
+	{
+		"value": "R",
+		"label": "[UTC-5] US Eastern (New York)",
+		"offset": -5
+	},
+	{
+		"value": "Q",
+		"label": "[UTC-4] Newfoundland",
+		"offset": -4
+	},
+	{
+		"value": "P",
+		"label": "[UTC-3] Falkland Islands",
+		"offset": -3
+	},
+	{
+		"value": "O",
+		"label": "[UTC-2]",
+		"offset": -2
+	},
+	{
+		"value": "N",
+		"label": "[UTC-1] Cape Verde",
+		"offset": -1
+	},
+	{
+		"value": "Z",
+		"label": "[UTC+0] London",
+		"offset": 0
+	},
+	{
+		"value": "A",
+		"label": "[UTC+1] (Berlin, Paris, Rome)",
+		"offset": 1
+	},
+	{
+		"value": "B",
+		"label": "[UTC+2] (Cairo, Johannesburg)",
+		"offset": 2
+	},
+	{
+		"value": "C",
+		"label": "[UTC+3] (Istanbul, Moscow)",
+		"offset": 3
+	},
+	{
+		"value": "D",
+		"label": "[UTC+4] (Dubai)",
+		"offset": 4
+	},
+	{
+		"value": "E",
+		"label": "[UTC+5] (Karachi)",
+		"offset": 5
+	},
+	{
+		"value": "F",
+		"label": "[UTC+6] (Dhaka)",
+		"offset": 6
+	},
+	{
+		"value": "G",
+		"label": "[UTC+7] (Bangkok)",
+		"offset": 7
+	},
+	{
+		"value": "H",
+		"label": "[UTC+8] China",
+		"offset": 8
+	},
+	{
+		"value": "I",
+		"label": "[UTC+9] Japan, South Korea",
+		"offset": 9
+	},
+	{
+		"value": "K",
+		"label": "[UTC+10] Australia",
+		"offset": 10
+	},
+	{
+		"value": "L",
+		"label": "[UTC+11] Papua New Guinea",
+		"offset": 11
+	},
+	{
+		"value": "M",
+		"label": "[UTC+12] New Zealand",
+		"offset": 12
+	}
+]

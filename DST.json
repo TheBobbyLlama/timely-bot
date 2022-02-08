@@ -1,0 +1,215 @@
+[
+	{
+		"label": "No Daylight Savings Time"
+	},
+	{
+		"label": "Australia",
+		"starts": {
+			"month": 9,
+			"weekday": 0,
+			"dayCount": 1,
+			"time": 2
+		},
+		"ends": {
+			"month": 3,
+			"weekday": 0,
+			"dayCount": 1,
+			"time": 3
+		}
+	},
+	{
+		"label": "Chile",
+		"starts": {
+			"month": 8,
+			"weekday": 6,
+			"dayCount": 1,
+			"time": 24
+		},
+		"ends": {
+			"month": 3,
+			"weekday": 6,
+			"dayCount": 1,
+			"time": 24
+		}
+	},
+	{
+		"label": "Cuba",
+		"starts": {
+			"month": 2,
+			"weekday": 0,
+			"dayCount": 2,
+			"time": 0
+		},
+		"ends": {
+			"month": 10,
+			"weekday": 0,
+			"dayCount": 1,
+			"time": 0
+		}
+	},
+	{
+		"label": "EU",
+		"starts": {
+			"month": 2,
+			"weekday": 0,
+			"dayCount": -1,
+			"time": 1
+		},
+		"ends": {
+			"month": 9,
+			"weekday": 0,
+			"dayCount": -1,
+			"time": 1
+		}
+	},
+	{
+		"label": "Israel",
+		"starts": {
+			"month": 2,
+			"weekday": 5,
+			"dayCount": -1,
+			"time": 2
+		},
+		"ends": {
+			"month": 9,
+			"weekday": 0,
+			"dayCount": -1,
+			"time": 2
+		}
+	},
+	{
+		"label": "Jordan",
+		"starts": {
+			"month": 1,
+			"weekday": 4,
+			"dayCount": -1,
+			"time": 24
+		},
+		"ends": {
+			"month": 9,
+			"weekday": 5,
+			"dayCount": -1,
+			"time": 0
+		}
+	},
+	{
+		"label": "Lebanon",
+		"starts": {
+			"month": 2,
+			"weekday": 0,
+			"dayCount": -1,
+			"time": 0
+		},
+		"ends": {
+			"month": 9,
+			"weekday": 0,
+			"dayCount": -1,
+			"time": 0
+		}
+	},
+	{
+		"label": "Mexico",
+		"starts": {
+			"month": 3,
+			"weekday": 0,
+			"dayCount": 1,
+			"time": 2
+		},
+		"ends": {
+			"month": 9,
+			"weekday": 0,
+			"dayCount": -1,
+			"time": 2
+		}
+	},
+	{
+		"label": "Moldova",
+		"starts": {
+			"month": 2,
+			"weekday": 0,
+			"dayCount": -1,
+			"time": 2
+		},
+		"ends": {
+			"month": 9,
+			"weekday": 0,
+			"dayCount": -1,
+			"time": 3
+		}
+	},
+	{
+		"label": "New Zealand",
+		"starts": {
+			"month": 8,
+			"weekday": 0,
+			"dayCount": -1,
+			"time": 2
+		},
+		"ends": {
+			"month": 3,
+			"weekday": 0,
+			"dayCount": 1,
+			"time": 2
+		}
+	},
+	{
+		"label": "Palestine",
+		"starts": {
+			"month": 2,
+			"weekday": 6,
+			"dayCount": -1,
+			"time": 0
+		},
+		"ends": {
+			"month": 9,
+			"weekday": 5,
+			"dayCount": -1,
+			"time": 1
+		}
+	},
+	{
+		"label": "Paraguay",
+		"starts": {
+			"month": 9,
+			"weekday": 0,
+			"dayCount": 1,
+			"time": 0
+		},
+		"ends": {
+			"month": 2,
+			"weekday": 0,
+			"dayCount": 1,
+			"time": 0
+		}
+	},
+	{
+		"label": "Syria",
+		"starts": {
+			"month": 2,
+			"weekday": 5,
+			"dayCount": -1,
+			"time": 0
+		},
+		"ends": {
+			"month": 9,
+			"weekday": 5,
+			"dayCount": -1,
+			"time": 0
+		}
+	},
+	{
+		"label": "US & Canada",
+		"starts": {
+			"month": 2,
+			"weekday": 0,
+			"dayCount": 2,
+			"time": 2
+		},
+		"ends": {
+			"month": 10,
+			"weekday": 0,
+			"dayCount": 1,
+			"time": 2
+		}
+	}
+]
