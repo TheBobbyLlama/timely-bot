@@ -57,42 +57,10 @@ client.on("interactionCreate", async interaction => {
 				.addOptions(DST.map(ds => { return { label: ds.label, value: dstPrefix + ":" + ds.label }}))
 		));
 
-		let dms = await interaction.user.createDM();
-
-		await dms.send({ content: "Please select your *Timekeeper* settings:", components: rows });
+		await interaction.reply({ content: "Select your time zone:", components: rows, ephemeral: true });
+	} else {
+		interaction.reply({ content: "Invalid command.", ephemeral: true });
 	}
-
-	/*
-	let row;
-	const { commandName } = interaction;
-
-	switch (commandName) {
-		case "timekeeper":
-			row = new MessageActionRow()
-				.addComponents(
-					new MessageSelectMenu()
-						.setCustomId("select")
-						.setPlaceholder("Select Time Zone")
-						.addOptions(timezones.map(tz => { return { label: tz.label, value: tz.value }}))
-				);
-
-			await interaction.reply({ content: "Select your time zone:", components: [row] });
-			break;
-		case "timekeeper_dst":
-			row = new MessageActionRow()
-				.addComponents(
-					new MessageSelectMenu()
-						.setCustomId("select")
-						.setPlaceholder("Select Daylight Savings Type")
-						.addOptions(DST.map(ds => { return { label: ds.label, value: ds.label }}))
-				);
-
-			await interaction.reply({ content: "Select daylight savings:", components: [row] });
-			break;
-		default:
-			interaction.reply("Invalid command.");
-	}*/
-
 });
 
 // Selections.
@@ -100,26 +68,26 @@ client.on("interactionCreate", async interaction => {
 	if (!interaction.isSelectMenu()) return;
 
 	try {
-		if (interaction.values[0]) {
+		if ((interaction.message.interaction.commandName === "timekeeper") && (interaction.values[0])) {
 			let interactionData = interaction.values[0].split(":");
 
 			switch (interactionData[0]) {
 				case timezonePrefix:
 					let tzValue = interactionData[1];
 					await database.ref("users/" + interaction.user.id + "/timezone").set(tzValue);
-					//await interaction.update({ content: "Timezone set to `" + timezones.find(tz => tz.value === tzValue).label + "`", components: [] });
+					await interaction.reply({ content: "Timezone set to `" + timezones.find(tz => tz.value === tzValue).label + "`", ephemeral: true })
 					break;
 				case dstPrefix:
 					let dsValue = interactionData[1];
 					await database.ref("users/" + interaction.user.id + "/dst").set(dsValue);
-					//await interaction.update({ content: "Daylight savings will be calculated to `" + dsValue + "` standards.", components: [] });
+					await interaction.reply({ content: "Daylight savings will be calculated to `" + dsValue + "` standards.", ephemeral: true });
 					break;
 				default:
 					throw new Error("Invalid command.");
 			}
 		}
 	} catch (err) {
-		await interaction.reply("An error occurred: `" + (err.message || err) + "`");
+		await interaction.reply({ content: "An error occurred: `" + (err.message || err) + "`", ephemeral: true });
 	}
 });
 
