@@ -94,6 +94,8 @@ client.on("interactionCreate", async interaction => {
 // Message listener.
 client.on("messageCreate", async message => {
 	try {
+		if (message.author.bot) return;
+
 		const finds = message.content.match(/\b(([1-9]|10|11|12)(:[0-5][0-9])?\s?[aApP][mM])|\b(([1-9]|10|11|12):[0-5][0-9])/g);
 
 		// Keep going if we found a time - but not too many!
