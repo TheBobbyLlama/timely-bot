@@ -31,6 +31,7 @@ client.once('ready', () => {
 	console.log("Running!");
 });
 
+// Slash Commands.
 client.on("interactionCreate", async interaction => {
 	if (!interaction.isCommand()) return;
 
@@ -66,6 +67,7 @@ client.on("interactionCreate", async interaction => {
 
 });
 
+// Selections.
 client.on("interactionCreate", async interaction => {
 	if (!interaction.isSelectMenu()) return;
 
@@ -91,19 +93,23 @@ client.on("interactionCreate", async interaction => {
 	}
 });
 
+// Message listener.
 client.on("messageCreate", async message => {
 	try {
 		const finds = message.content.match(/\b(([1-9]|10|11|12)(:[0-5][0-9])?\s?[aApP][mM])|\b(([1-9]|10|11|12):[0-5][0-9])/g);
 
-		if (finds?.length) {
-			const tzResult = await getUserTimezone(message.author.id);
+		// Keep going if we found a time - but not too many!
+		if ((finds?.length) && (finds.length <= 4)) {
+			const tzResult = await getUserInfo(message.author.id);
 			const zone = tzResult.timezone;
 
+			// Keep going if the message's author has a time zone registered.
 			if (zone) {
 				const offset = timezones.find(tz => tz.value === zone).offset;
 				const dstSetting = DST.find(ds => ds.label === tzResult.dst) || {};
 				let dstOffset = 0;
 
+				// Figure out if the author is in daylight savings time.
 				if (dstSetting.starts) {
 					// Convert current time to UTC
 					let checkTime = new Date();
@@ -123,6 +129,7 @@ client.on("messageCreate", async message => {
 					}
 				}
 
+				// Shift the times to UTC.
 				const adjustedTimes = finds.map(time => {
 					let curTime = time.toLowerCase();
 					let ampm;
@@ -162,16 +169,16 @@ client.on("messageCreate", async message => {
 					return result;
 				});
 
-				if (finds.length > 1) {
-					var output = "__TIMES__";
-					for (var i = 0; i < finds.length; i++) {
-						output += "\n**" + finds[i] + "** - " + "<t:" + Math.floor(adjustedTimes[i].getTime() / 1000) + ":t>";
-					}
+				// Spit out the results.
+				var output = "";
 
-					message.reply(output);
-				} else {
-					message.reply("**" + finds[0] + "** - <t:" + Math.floor(adjustedTimes[0].getTime() / 1000) + ":t>");
+				for (var i = 0; i < finds.length; i++) {
+					if (i > 0) output += "\n";
+
+					output += "**" + finds[i] + "** - " + "<t:" + Math.floor(adjustedTimes[i].getTime() / 1000) + ":t>";
 				}
+
+				message.reply(output);
 			}
 		}
 	} catch (err) {
@@ -179,12 +186,14 @@ client.on("messageCreate", async message => {
 	}
 });
 
-const getUserTimezone = async (userId) => {
+// Pull user entry from the database.
+const getUserInfo = async (userId) => {
 	return await database.ref("users/" + userId).once("value").then((result) => {
 		return result.val() || {};
 	});
 }
 
+// Use DST data to figure out a date (last Sunday in March, first Sunday in October, and so on)
 const calculateDate = (dateInfo) => {
 	let result = new Date();
 	result.setUTCHours(0, 0, 0, 0);
@@ -192,6 +201,7 @@ const calculateDate = (dateInfo) => {
 	let curDay = 0;
 	let dayHits = 0;
 
+	// Positive dayCount -> count from the beginning of the month.
 	if (dateInfo.dayCount > 0) {
 		result.setUTCMonth(dateInfo.month + 1);
 
@@ -204,6 +214,7 @@ const calculateDate = (dateInfo) => {
 				}
 			}
 		}
+	// Negative dayCount -> count from the end of the month.
 	} else if (dateInfo.dayCount < 0) {
 		result.setUTCMonth(dateInfo.month);
 
@@ -218,10 +229,11 @@ const calculateDate = (dateInfo) => {
 		}
 	}
 
+	// Set the time as if we are UTC+0, because the time we're checking against has already been normalized to UTC+0.
 	result.setUTCHours(dateInfo.time, 0, 0, 0);
 
 	return result;
 }
 
-// Login to Discord with your client's token
+// Log the bot into Discord.
 client.login(process.env.BOT_TOKEN);
