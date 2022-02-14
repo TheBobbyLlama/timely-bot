@@ -3,7 +3,10 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Timekeeper - A Discord Bot For Keeping Times Straight!</title>
+		<meta name="description" content="Timekeeper is a Discord bot for managing times for users across the world using Discord's timestamp feature." />
+		<meta property="og:image" content="./assets/images/Timekeeper.png"/>
+		<title>Timekeeper - A Discord Bot For Managing Times Around the World!</title>
+		<link rel="icon" href="./assets/images/Timekeeper.png" type="image/png" />
 		<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
 		<link rel="stylesheet" href="./assets/css/style.css" />
 	</head>
@@ -18,7 +21,7 @@
 				<div id="bot-demo"></div>
 			</aside>
 			<p>
-				The bot can convert more than one time in a post, but it will ignore posts with more than 4 time entries to prevent getting too spammy.
+				Times will be recognized if they are formatted like <span class="command">8:30 PM</span>, <span class="command">8pm</span>, or <span class="command">8:30</span>.  The bot can convert more than one time in a post, but it will ignore posts with more than 4 time entries to avoid spamminess.
 			</p>
 		</section>
 		<section>
@@ -39,7 +42,7 @@
 				After a user has entered their settings, then the bot will start working!  Whenever that user makes a post, the bot will check it to see if it includes times.  If any times are found, it will reply to the post with those times as a timestamp!
 			</p>
 			<p>
-				<strong>Important:</strong> Timekeeper can only convert times from the user's local time zone to timestamps.  Any times you post <em>must</em> be in your local time zone to be converted correctly.  If you try to write a time as <span class="command">2 PM EST</span>, Timekeeper will convert it as if it were 2 PM in your own time zone!
+				<strong>Important:</strong> Timekeeper can only convert times from the user's local time zone to timestamps.  Any times you post <em>must</em> be in your local time zone to be converted correctly.  If you were to try to write a time as <span class="command">2 PM UTC</span>, Timekeeper would convert it as if it were 2 PM in your own time zone!
 			</p>
 		</section>
 	</body>
