@@ -1,0 +1,165 @@
+:root {
+	--page-background: #181820;
+	--content-color: #e0e0f0;
+	--content-background: #303038;
+	--inset-background: #505058;
+	--inset-border: #404048;
+	--button-color: #183828;
+	--button-background: #c8f0d0;
+	--button-border: #709080;
+	--button-highlight: #e8f0ec;
+
+	--nav-width: 160px;
+}
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+a {
+	color: #508068;
+	overflow-wrap: anywhere;
+}
+
+a:visited {
+	color: #406050;
+}
+
+aside {
+	align-items: center;
+	display: flex;
+	justify-content: center;
+	margin-top: 20px;
+}
+
+aside > div {
+	background-color: var(--page-background);
+	background-position: 0% center;
+	background-repeat: no-repeat;
+	border: solid 2px var(--inset-border);
+	border-radius: 10px;
+}
+
+aside + * {
+	margin-top: 20px;
+}
+
+body {
+	background-color: var(--page-background);
+	color: var(--content-color);
+	font-family: sans-serif;
+}
+
+h1, h2, h3, h4 {
+	color: var(--button-background);
+	font-family: 'Roboto', sans-serif;
+	font-weight: normal;
+}
+
+h1 {
+	align-items: center;
+	display: flex;
+	font-size: 72px;
+	justify-content: center;
+}
+
+h1::before {
+	background: url('../images/Timekeeper.png');
+	background-size: cover;
+	content: ' ';
+	display: inline-block;
+	height: 72px;
+	margin-right: 12px;
+	width: 72px;
+}
+
+p + p {
+	margin-top: 8px;
+}
+
+section {
+	background-color: transparent;
+	border-radius: 4px;
+	margin: 20px;
+	padding: 10px 20px 20px 20px;
+	transition: 1s;
+}
+
+/* clearfix from w3schools.com */
+section::after {
+	content: "";
+	clear: both;
+	display: table;
+}
+
+section h2 {
+	display: inline-block;
+	margin-bottom: 10px;
+	position: relative;
+}
+
+section h2::after {
+	border-bottom: solid 4px var(--button-background);
+	bottom: -2px;
+	content: "";
+	display: block;
+	left: 0px;
+	position: absolute;
+	top: 0px;
+	transition: 0.5s;
+	width: 0%;
+}
+
+section:hover {
+	background-color: var(--content-background);
+}
+
+section:hover h2::after {
+	width: 100%;
+}
+
+#bot-demo {
+	background-image: url('../images/bot-demo.png');
+	height: 146px;
+	width: 497px;
+}
+
+#config-blank {
+	background-image: url('../images/config-blank.png');
+	height: 230px;
+	width: 1045px;
+}
+
+#config-complete {
+	background-image: url('../images/config-complete.png');
+	height: 502px;
+	width: 1045px;
+}
+
+.command {
+	background-color: var(--page-background);
+	border-radius: 4px;
+	font-family: 'Courier New', Courier, monospace;
+	font-weight: bold;
+	padding: 0px 4px;
+	white-space: nowrap;
+}
+
+@media screen and (max-width: 440px) {
+	h1 {
+		font-size: 48px;
+	}
+
+	h1::before {
+		height: 48px;
+		margin-right: 8px;
+		width: 48px;
+	}
+
+	section {
+		margin: 10px;
+		padding: 10px;
+	}
+}

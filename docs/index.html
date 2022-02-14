@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Timekeeper - A Discord Bot For Keeping Times Straight!</title>
+		<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="./assets/css/style.css" />
+	</head>
+	<body>
+		<h1>Timekeeper</h1>
+		<section>
+			<h2>What is Timekeeper?</h2>
+			<p>
+				Timekeeper is a <a href="https://discord.com/" target="_blank">Discord</a> bot for managing times for users across the world using Discord's <a href="https://hammertime.djdavid98.art/" target="_blank">timestamp</a> feature.  Once a user has set up their time zone with the bot, it will monitor their posts.  If the user posts anything with a time in it, the bot will reply with that time converted to a timestamp, which will display as the correct local time for whoever views it.
+			</p>
+			<aside>
+				<div id="bot-demo"></div>
+			</aside>
+			<p>
+				The bot can convert more than one time in a post, but it will ignore posts with more than 4 time entries to prevent getting too spammy.
+			</p>
+		</section>
+		<section>
+			<h2>Using Timekeeper</h2>
+			<p>
+				The first thing you need to get started is to invite the bot to your server, of course!
+			</p>
+			<p>
+				<a href="https://discord.com/api/oauth2/authorize?client_id=940552993609240616&permissions=2048&scope=bot%20applications.commands" target="_blank">https://discord.com/api/oauth2/authorize?client_id=940552993609240616&permissions=2048&scope=bot%20applications.commands</a>
+			</p>
+			<p>
+				Once the bot is in your server, any user can set up their time zone and daylight savings info by using the <span class="command">/timekeeper</span> command.  This will show the user a pair of dropdowns for selecting their settings.
+			</p>
+			<aside>
+				<div id="config-blank"></div>
+			</aside>
+			<p>
+				After a user has entered their settings, then the bot will start working!  Whenever that user makes a post, the bot will check it to see if it includes times.  If any times are found, it will reply to the post with those times as a timestamp!
+			</p>
+			<p>
+				<strong>Important:</strong> Timekeeper can only convert times from the user's local time zone to timestamps.  Any times you post <em>must</em> be in your local time zone to be converted correctly.  If you try to write a time as <span class="command">2 PM EST</span>, Timekeeper will convert it as if it were 2 PM in your own time zone!
+			</p>
+		</section>
+	</body>
+</html>
