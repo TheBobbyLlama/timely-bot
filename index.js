@@ -7,6 +7,8 @@ require("dotenv").config();
 const timezonePrefix = "timekeeperTZ";
 const dstPrefix = "timekeeperDST";
 
+const setupMessage = "Please configure your time zone and daylight savings settings with the dropdowns below.  Your settings will be used across all servers that use Timekeeper, so you will only ever have to do this once!";
+
 let database = null;
 
 // Create a new client instance
@@ -41,12 +43,16 @@ client.on("interactionCreate", async interaction => {
 	if (interaction.commandName === "timekeeper") {
 		let rows = [];
 
+		const tzResult = (await getUserInfo(interaction.user.id) || {});
+
+		console.log(tzResult);
+
 		rows.push(new MessageActionRow()
 		.addComponents(
 			new MessageSelectMenu()
 				.setCustomId("select")
 				.setPlaceholder("Select Time Zone")
-				.addOptions(timezones.map(tz => { return { label: tz.label, value: timezonePrefix + ":" + tz.value }}))
+				.addOptions(timezones.map(tz => { return { label: tz.label, value: timezonePrefix + ":" + tz.value, default: tzResult.timezone === tz.value }}))
 		));
 
 		rows.push(new MessageActionRow()
@@ -54,10 +60,10 @@ client.on("interactionCreate", async interaction => {
 			new MessageSelectMenu()
 				.setCustomId("select2")
 				.setPlaceholder("Select Daylight Savings Type")
-				.addOptions(DST.map(ds => { return { label: ds.label, value: dstPrefix + ":" + ds.label }}))
+				.addOptions(DST.map(ds => { return { label: ds.label, value: dstPrefix + ":" + ds.label, default: tzResult.dst === ds.label }}))
 		));
 
-		await interaction.reply({ content: "Select your time zone:", components: rows, ephemeral: true });
+		await interaction.reply({ content: setupMessage, components: rows, ephemeral: true });
 	} else {
 		interaction.reply({ content: "Invalid command.", ephemeral: true });
 	}
@@ -68,14 +74,14 @@ client.on("interactionCreate", async interaction => {
 	if (!interaction.isSelectMenu()) return;
 
 	try {
-		if ((interaction.message.interaction.commandName === "timekeeper") && (interaction.values[0])) {
+		if (((interaction.message.interaction.commandName === "timekeeper") || (interaction.message.interaction.name === "timekeeper")) && (interaction.values[0])) {
 			let interactionData = interaction.values[0].split(":");
 
 			switch (interactionData[0]) {
 				case timezonePrefix:
 					let tzValue = interactionData[1];
 					await database.ref("users/" + interaction.user.id + "/timezone").set(tzValue);
-					await interaction.reply({ content: "Timezone set to `" + timezones.find(tz => tz.value === tzValue).label + "`", ephemeral: true })
+					await interaction.reply({ content: "Timezone set to `" + timezones.find(tz => tz.value === tzValue).label + "`\n\nTimekeeper will now reply to any of your posts containing times and convert them into Discord timestamps.", ephemeral: true })
 					break;
 				case dstPrefix:
 					let dsValue = interactionData[1];
