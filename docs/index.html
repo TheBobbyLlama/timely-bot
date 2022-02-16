@@ -15,28 +15,28 @@
 		<section>
 			<h2>What is Timekeeper?</h2>
 			<p>
-				Timekeeper is a <a href="https://discord.com/" target="_blank">Discord</a> bot for managing times for users across the world using Discord's <a href="https://hammertime.djdavid98.art/" target="_blank">timestamp</a> feature.  Once a user has set up their time zone with the bot, it will monitor their posts.  If the user posts anything with a time in it, the bot will reply with that time converted to a timestamp, which will display as the correct local time for whoever views it.
+				Timekeeper is a <a href="https://discord.com/" target="_blank">Discord</a> bot for managing times for users across the world using Discord's <a href="https://hammertime.djdavid98.art/" target="_blank">timestamp</a> feature.  All you have to do to start using the bot is mark the time as code using backticks (<code>`</code>).
 			</p>
 			<aside>
 				<div id="bot-demo"></div>
 			</aside>
 			<p>
-				Times will be recognized if they are formatted like <span class="command">8:30 PM</span>, <span class="command">8pm</span>, or <span class="command">8:30</span>.  The bot can convert more than one time in a post, but it will ignore posts with more than 4 time entries to avoid spamminess.
+				The bot may be used without any other configuration if you supply the timezone when writing a time - <i>e.g.</i> <code>3 PM EST</code>, <code>8:30 PDT</code>, <code>13:00 UTC</code>, and so on.  You can tag as many times as you like in a post and Timekeeper will convert them all.
 			</p>
 			<p>
-				A time zone may also be specified (<i>e.g.</i> <span class="command">6:00 PM EST</span>).  Timekeeper currently recognizes the following time zones: <span class="command">EST</span>/<span class="command">EDT</span>, <span class="command">CST</span>/<span class="command">CDT</span>, <span class="command">MST</span>/<span class="command">MDT</span>, <span class="command">PST</span>/<span class="command">PDT</span>, and <span class="command">UTC</span>.
+				The currently supported time zones are as follows: <code>EST</code>/<code>EDT</code>, <code>CST</code>/<code>CDT</code>, <code>MST</code>/<code>MDT</code>, <code>PST</code>/<code>PDT</code>, and <code>UTC</code>.
 			</p>
 		</section>
 		<section>
-			<h2>Using Timekeeper</h2>
+			<h2>Automatic Time Conversion</h2>
 			<p>
-				In a server that has the bot, any user can set up their time zone and daylight savings info by using the <span class="command">/timekeeper</span> command.  This will show the user a pair of dropdowns for selecting their settings.
+				If you would like to use the bot for local times without having to specify your own time zone, you may use the <code>/timekeeper</code> command to select your own time zone and daylight savings settings.
 			</p>
 			<aside>
 				<div id="config-blank"></div>
 			</aside>
 			<p>
-				After a user has entered their settings, then the bot will start working!  Whenever that user makes a post, the bot will check it to see if it includes times.  If any times are found, it will reply to the post with those times as a timestamp!
+				Once you have set yourself up, you may omit the time zone from any times you tag and Timekeeper will convert them from your local time - <i>e.g.</i> <code>3 PM</code>, <code>8:30</code>
 			</p>
 		</section>
 		<section>

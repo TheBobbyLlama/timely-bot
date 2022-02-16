@@ -1,5 +1,5 @@
 const firebaseAdmin = require("firebase-admin");
-const { Client, Intents, MessageActionRow, MessageSelectMenu } = require("discord.js");
+const { Client, Intents, MessageActionRow, MessageSelectMenu, MessageEmbed } = require("discord.js");
 const timezones = require("./timezones.json");
 const DST = require("./DST.json");
 const tzOverrides = require("./timezoneOverrides.json");
@@ -46,8 +46,6 @@ client.on("interactionCreate", async interaction => {
 
 		const tzResult = (await getUserInfo(interaction.user.id) || {});
 
-		console.log(tzResult);
-
 		rows.push(new MessageActionRow()
 		.addComponents(
 			new MessageSelectMenu()
@@ -64,7 +62,14 @@ client.on("interactionCreate", async interaction => {
 				.addOptions(DST.map(ds => { return { label: ds.label, value: dstPrefix + ":" + ds.label, default: tzResult.dst === ds.label }}))
 		));
 
-		await interaction.reply({ content: setupMessage, components: rows, ephemeral: true });
+		const docEmbed = new MessageEmbed()
+							.setTitle("Timekeeper Documentation")
+							.setDescription("More information on how the bot works can be found here.")
+							.setThumbnail("https://thebobbyllama.github.io/timekeeper-bot/assets/images/Timekeeper.png")
+							.setAuthor({ name: "The Bobby Llama", url: "https://discordapp.com/users/288977733390696448/" })
+							.setURL("https://thebobbyllama.github.io/timekeeper-bot/");
+
+		await interaction.reply({ content: setupMessage, components: rows, embeds: [ docEmbed ], ephemeral: true });
 	} else {
 		interaction.reply({ content: "Invalid command.", ephemeral: true });
 	}
@@ -103,21 +108,20 @@ client.on("messageCreate", async message => {
 	try {
 		if (message.author.bot) return;
 
-		const finds = message.content.match(/\b((([1-9]|1[0-9]|2[0-3])(:[0-5][0-9])?\s?[ap][m])|(([0-9]|1[0-9]|2[0-3]):[0-5][0-9]))( (e[ds]t|c[ds]t|m[ds]t|p[ds]t|utc))?\b/gi);
+		const finds = message.content.match(/`((([1-9]|1[0-9]|2[0-3])(:[0-5][0-9])?\s?[ap][m])|(([0-9]|1[0-9]|2[0-3]):[0-5][0-9]))( (e[ds]t|c[ds]t|m[ds]t|p[ds]t|utc))?`/gi);
 
 		// Keep going if we found a time - but not too many!
-		if ((finds?.length) && (finds.length <= 4)) {
+		if (finds?.length) {
+			const results = [];
 			const tzResult = await getUserInfo(message.author.id);
-			const zone = tzResult.timezone;
 
-			// Keep going if the message's author has a time zone registered.
-			if (zone) {
-				// Shift the times to UTC.
-				const adjustedTimes = finds.map(time => {
-					let curTime = time.toLowerCase();
-					let ampm;
-					let curTZ = tzOverrides.find(tz => curTime.endsWith(tz.key)) || tzResult;
+			// Shift the times to UTC.
+			finds.forEach(time => {
+				let curTime = time.toLowerCase().replace(/`/g, "");
+				let ampm;
+				let curTZ = tzOverrides.find(tz => curTime.endsWith(tz.key)) || tzResult;
 
+				if (curTZ?.timezone) {
 					const offset = timezones.find(tz => tz.value === curTZ.timezone).offset;
 					const dstSetting = DST.find(ds => ds.label === curTZ.dst) || {};
 					let dstOffset = 0;
@@ -177,16 +181,18 @@ client.on("messageCreate", async message => {
 
 					var result = new Date();
 					result.setUTCHours(Number(splits[0]) - offset - dstOffset, splits[1] || 0, 0, 0);
-					return result;
-				});
+					results.push([ time, result]);
+				}
+			});
 
-				// Spit out the results.
+			// Spit out the results, if we have any.
+			if (results.length) {
 				var output = "";
 
-				for (var i = 0; i < finds.length; i++) {
+				for (var i = 0; i < results.length; i++) {
 					if (i > 0) output += "\n";
 
-					output += "**" + finds[i] + "** - " + "<t:" + Math.floor(adjustedTimes[i].getTime() / 1000) + ":t>";
+					output += "**" + results[i][0] + "** - " + "<t:" + Math.floor(results[i][1].getTime() / 1000) + ":t>";
 				}
 
 				message.reply(output);

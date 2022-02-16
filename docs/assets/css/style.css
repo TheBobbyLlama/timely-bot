@@ -47,6 +47,15 @@ body {
 	font-family: sans-serif;
 }
 
+code {
+	background-color: var(--page-background);
+	border-radius: 4px;
+	font-family: 'Courier New', Courier, monospace;
+	font-weight: bold;
+	padding: 2px 4px 0px 4px;
+	white-space: nowrap;
+}
+
 h1, h2, h3, h4 {
 	color: var(--title-background);
 	font-family: 'Roboto', sans-serif;
@@ -117,29 +126,20 @@ section:hover h2::after {
 
 #bot-demo {
 	background-image: url('../images/bot-demo.png');
-	height: 146px;
-	width: 497px;
+	height: 145px;
+	width: 495px;
 }
 
 #config-blank {
 	background-image: url('../images/config-blank.png');
-	height: 230px;
-	width: 1045px;
+	height: 348px;
+	width: 1027px;
 }
 
 #config-complete {
 	background-image: url('../images/config-complete.png');
 	height: 502px;
 	width: 1045px;
-}
-
-.command {
-	background-color: var(--page-background);
-	border-radius: 4px;
-	font-family: 'Courier New', Courier, monospace;
-	font-weight: bold;
-	padding: 0px 4px;
-	white-space: nowrap;
 }
 
 @media screen and (max-width: 440px) {
