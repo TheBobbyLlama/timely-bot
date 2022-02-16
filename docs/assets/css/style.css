@@ -4,12 +4,7 @@
 	--content-background: #303038;
 	--inset-background: #505058;
 	--inset-border: #404048;
-	--button-color: #183828;
-	--button-background: #c8f0d0;
-	--button-border: #709080;
-	--button-highlight: #e8f0ec;
-
-	--nav-width: 160px;
+	--title-background: #a0d0f0;
 }
 
 * {
@@ -19,12 +14,12 @@
 }
 
 a {
-	color: #508068;
+	color: #486880;
 	overflow-wrap: anywhere;
 }
 
 a:visited {
-	color: #406050;
+	color: #385060;
 }
 
 aside {
@@ -53,7 +48,7 @@ body {
 }
 
 h1, h2, h3, h4 {
-	color: var(--button-background);
+	color: var(--title-background);
 	font-family: 'Roboto', sans-serif;
 	font-weight: normal;
 }
@@ -101,7 +96,7 @@ section h2 {
 }
 
 section h2::after {
-	border-bottom: solid 4px var(--button-background);
+	border-bottom: solid 4px var(--title-background);
 	bottom: -2px;
 	content: "";
 	display: block;

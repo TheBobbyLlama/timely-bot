@@ -2,6 +2,7 @@ const firebaseAdmin = require("firebase-admin");
 const { Client, Intents, MessageActionRow, MessageSelectMenu } = require("discord.js");
 const timezones = require("./timezones.json");
 const DST = require("./DST.json");
+const tzOverrides = require("./timezoneOverrides.json");
 require("dotenv").config();
 
 const timezonePrefix = "timekeeperTZ";
@@ -102,7 +103,7 @@ client.on("messageCreate", async message => {
 	try {
 		if (message.author.bot) return;
 
-		const finds = message.content.match(/\b(([1-9]|10|11|12)(:[0-5][0-9])?\s?[aApP][mM])|\b(([1-9]|10|11|12):[0-5][0-9])/g);
+		const finds = message.content.match(/\b((([1-9]|1[0-9]|2[0-3])(:[0-5][0-9])?\s?[ap][m])|(([0-9]|1[0-9]|2[0-3]):[0-5][0-9]))( (e[ds]t|c[ds]t|m[ds]t|p[ds]t|utc))?\b/gi);
 
 		// Keep going if we found a time - but not too many!
 		if ((finds?.length) && (finds.length <= 4)) {
@@ -111,52 +112,56 @@ client.on("messageCreate", async message => {
 
 			// Keep going if the message's author has a time zone registered.
 			if (zone) {
-				const offset = timezones.find(tz => tz.value === zone).offset;
-				const dstSetting = DST.find(ds => ds.label === tzResult.dst) || {};
-				let dstOffset = 0;
-
-				// Figure out if the author is in daylight savings time.
-				if (dstSetting.starts) {
-					// Convert current time to UTC
-					let checkTime = new Date();
-					checkTime.setUTCHours(checkTime.getUTCHours() - offset);
-
-					let startTime = calculateDate(dstSetting.starts);
-					let endTime = calculateDate(dstSetting.ends);
-
-					if (startTime < endTime) {
-						if ((startTime < checkTime) && (checkTime < endTime)) {
-							dstOffset = 1;
-						}
-					} else if (startTime > endTime) {
-						if ((checkTime < startTime) || (endTime < checkTime)) {
-							dstOffset = 1;
-						}
-					}
-				}
-
 				// Shift the times to UTC.
 				const adjustedTimes = finds.map(time => {
 					let curTime = time.toLowerCase();
 					let ampm;
+					let curTZ = tzOverrides.find(tz => curTime.endsWith(tz.key)) || tzResult;
 
-					if (curTime.endsWith("pm")) {
+					const offset = timezones.find(tz => tz.value === curTZ.timezone).offset;
+					const dstSetting = DST.find(ds => ds.label === curTZ.dst) || {};
+					let dstOffset = 0;
+	
+					// Figure out if the author is in daylight savings time.
+					if (dstSetting.starts) {
+						// Convert current time to UTC
+						let checkTime = new Date();
+						checkTime.setUTCHours(checkTime.getUTCHours() - offset);
+	
+						let startTime = calculateDate(dstSetting.starts);
+						let endTime = calculateDate(dstSetting.ends);
+	
+						if (startTime < endTime) {
+							if ((startTime < checkTime) && (checkTime < endTime)) {
+								dstOffset = 1;
+							}
+						} else if (startTime > endTime) {
+							if ((checkTime < startTime) || (endTime < checkTime)) {
+								dstOffset = 1;
+							}
+						}
+					}
+
+					if (curTime.match(/pm\b/i)) {
 						ampm = "pm";
-					} else if (curTime.endsWith("am")) {
+					} else if (curTime.match(/am\b/i)) {
 						ampm = "am";
-					} else {
+					} else if (!curTime.endsWith("utc")) {
 						// Figure out whichever am or pm is next!!!
 						let tmpDate = new Date();
 						tmpDate.setUTCMinutes(0, 0, 0);
 
-						if (tmpDate.getUTCHours() + offset >= 12) {
-							ampm = "pm";
+						let inputHours = curTime.match(/^\d+/);
+						let curHours = tmpDate.getUTCHours() + offset;
+
+						if ((curHours % 12) > inputHours) {
+							ampm = (curHours >= 12) ? "am" : "pm";
 						} else {
-							ampm = "am";
+							ampm = (curHours >= 12) ? "pm" : "am";
 						}
 					}
 
-					curTime = curTime.replace(/^(.+)\s?[ap]m$/, "$1");
+					curTime = curTime.replace(/^([0-9:]+)[\sa-z]*$/, "$1");
 
 					const splits = curTime.split(":");
 

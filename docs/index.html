@@ -23,17 +23,14 @@
 			<p>
 				Times will be recognized if they are formatted like <span class="command">8:30 PM</span>, <span class="command">8pm</span>, or <span class="command">8:30</span>.  The bot can convert more than one time in a post, but it will ignore posts with more than 4 time entries to avoid spamminess.
 			</p>
+			<p>
+				A time zone may also be specified (<i>e.g.</i> <span class="command">6:00 PM EST</span>).  Timekeeper currently recognizes the following time zones: <span class="command">EST</span>/<span class="command">EDT</span>, <span class="command">CST</span>/<span class="command">CDT</span>, <span class="command">MST</span>/<span class="command">MDT</span>, <span class="command">PST</span>/<span class="command">PDT</span>, and <span class="command">UTC</span>.
+			</p>
 		</section>
 		<section>
 			<h2>Using Timekeeper</h2>
 			<p>
-				The first thing you need to get started is to invite the bot to your server, of course!
-			</p>
-			<p>
-				<a href="https://discord.com/api/oauth2/authorize?client_id=940552993609240616&permissions=2048&scope=bot%20applications.commands" target="_blank">https://discord.com/api/oauth2/authorize?client_id=940552993609240616&permissions=2048&scope=bot%20applications.commands</a>
-			</p>
-			<p>
-				Once the bot is in your server, any user can set up their time zone and daylight savings info by using the <span class="command">/timekeeper</span> command.  This will show the user a pair of dropdowns for selecting their settings.
+				In a server that has the bot, any user can set up their time zone and daylight savings info by using the <span class="command">/timekeeper</span> command.  This will show the user a pair of dropdowns for selecting their settings.
 			</p>
 			<aside>
 				<div id="config-blank"></div>
@@ -41,8 +38,11 @@
 			<p>
 				After a user has entered their settings, then the bot will start working!  Whenever that user makes a post, the bot will check it to see if it includes times.  If any times are found, it will reply to the post with those times as a timestamp!
 			</p>
+		</section>
+		<section>
+			<h2>Add Timekeeper to Your Server!</h2>
 			<p>
-				<strong>Important:</strong> Timekeeper can only convert times from the user's local time zone to timestamps.  Any times you post <em>must</em> be in your local time zone to be converted correctly.  If you were to try to write a time as <span class="command">2 PM UTC</span>, Timekeeper would convert it as if it were 2 PM in your own time zone!
+				<a href="https://discord.com/api/oauth2/authorize?client_id=940552993609240616&permissions=2048&scope=bot%20applications.commands" target="_blank">https://discord.com/api/oauth2/authorize?client_id=940552993609240616&permissions=2048&scope=bot%20applications.commands</a>
 			</p>
 		</section>
 	</body>

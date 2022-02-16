@@ -1,0 +1,47 @@
+[
+	{
+		"key": "utc",
+		"timezone": "Z",
+		"dst": ""
+	},
+	{
+		"key": "edt",
+		"timezone": "R",
+		"dst": "US & Canada"
+	},
+	{
+		"key": "est",
+		"timezone": "R",
+		"dst": ""
+	},
+	{
+		"key": "cdt",
+		"timezone": "S",
+		"dst": "US & Canada"
+	},
+	{
+		"key": "cst",
+		"timezone": "S",
+		"dst": ""
+	},
+	{
+		"key": "mdt",
+		"timezone": "T",
+		"dst": "US & Canada"
+	},
+	{
+		"key": "mst",
+		"timezone": "T",
+		"dst": ""
+	},
+	{
+		"key": "pdt",
+		"timezone": "U",
+		"dst": "US & Canada"
+	},
+	{
+		"key": "pst",
+		"timezone": "U",
+		"dst": ""
+	}
+]
