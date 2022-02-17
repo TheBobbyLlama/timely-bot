@@ -261,7 +261,7 @@ const convertTime = (time, tzInfo) => {
 }
 
 const setStatus = () => {
-	client.user.setActivity(`Keeping ${client.guilds.cache.size} servers timely`);
+	client.user.setActivity({ name:`the time on ${client.guilds.cache.size} servers`, type: "WATCHING" });
 }
 
 // Log the bot into Discord.
