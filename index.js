@@ -260,5 +260,12 @@ const convertTime = (time, tzInfo) => {
 	return result;
 }
 
+const setStatus = () => {
+	client.user.setActivity(`Keeping ${client.guilds.cache.size} servers timely`);
+}
+
 // Log the bot into Discord.
-client.login(process.env.BOT_TOKEN);
+client.login(process.env.BOT_TOKEN).then(() => {
+	setInterval(setStatus, 3600000);  // Update status once per hour.
+	setStatus();
+});
