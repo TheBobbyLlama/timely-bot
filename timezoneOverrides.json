@@ -12,7 +12,7 @@
 	{
 		"key": "est",
 		"timezone": "R",
-		"dst": ""
+		"dst": "US & Canada"
 	},
 	{
 		"key": "cdt",
@@ -22,7 +22,7 @@
 	{
 		"key": "cst",
 		"timezone": "S",
-		"dst": ""
+		"dst": "US & Canada"
 	},
 	{
 		"key": "mdt",
@@ -32,7 +32,7 @@
 	{
 		"key": "mst",
 		"timezone": "T",
-		"dst": ""
+		"dst": "US & Canada"
 	},
 	{
 		"key": "pdt",
@@ -42,6 +42,6 @@
 	{
 		"key": "pst",
 		"timezone": "U",
-		"dst": ""
+		"dst": "US & Canada"
 	}
 ]

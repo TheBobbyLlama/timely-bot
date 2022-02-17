@@ -37,21 +37,21 @@ client.once('ready', () => {
 	console.log("Running!");
 });
 
-// Slash Commands.
+// Slash Command.
 client.on("interactionCreate", async interaction => {
 	if (!interaction.isCommand()) return;
 
 	if (interaction.commandName === "timekeeper") {
 		let rows = [];
 
-		const tzResult = (await getUserInfo(interaction.user.id) || {});
+		const userTZ = (await getUserInfo(interaction.user.id) || {});
 
 		rows.push(new MessageActionRow()
 		.addComponents(
 			new MessageSelectMenu()
 				.setCustomId("select")
 				.setPlaceholder("Select Time Zone")
-				.addOptions(timezones.map(tz => { return { label: tz.label, value: timezonePrefix + ":" + tz.value, default: tzResult.timezone === tz.value }}))
+				.addOptions(timezones.map(tz => { return { label: tz.label, value: timezonePrefix + ":" + tz.value, default: userTZ.timezone === tz.value }}))
 		));
 
 		rows.push(new MessageActionRow()
@@ -59,7 +59,7 @@ client.on("interactionCreate", async interaction => {
 			new MessageSelectMenu()
 				.setCustomId("select2")
 				.setPlaceholder("Select Daylight Savings Type")
-				.addOptions(DST.map(ds => { return { label: ds.label, value: dstPrefix + ":" + ds.label, default: tzResult.dst === ds.label }}))
+				.addOptions(DST.map(ds => { return { label: ds.label, value: dstPrefix + ":" + ds.label, default: userTZ.dst === ds.label }}))
 		));
 
 		const docEmbed = new MessageEmbed()
@@ -95,7 +95,7 @@ client.on("interactionCreate", async interaction => {
 					await interaction.reply({ content: "Daylight savings will be calculated to `" + dsValue + "` standards.", ephemeral: true });
 					break;
 				default:
-					throw new Error("Invalid command.");
+					throw new Error("Invalid selection.");
 			}
 		}
 	} catch (err) {
@@ -110,78 +110,18 @@ client.on("messageCreate", async message => {
 
 		const finds = message.content.match(/`((([1-9]|1[0-9]|2[0-3])(:[0-5][0-9])?\s?[ap][m])|(([0-9]|1[0-9]|2[0-3]):[0-5][0-9]))( (e[ds]t|c[ds]t|m[ds]t|p[ds]t|utc))?`/gi);
 
-		// Keep going if we found a time - but not too many!
+		// Keep going if we found any times.
 		if (finds?.length) {
 			const results = [];
-			const tzResult = await getUserInfo(message.author.id);
+			const userTZ = await getUserInfo(message.author.id);
 
 			// Shift the times to UTC.
 			finds.forEach(time => {
 				let curTime = time.toLowerCase().replace(/`/g, "");
-				let ampm;
-				let curTZ = tzOverrides.find(tz => curTime.endsWith(tz.key)) || tzResult;
+				let curTZ = tzOverrides.find(tz => curTime.endsWith(tz.key)) || userTZ;
 
 				if (curTZ?.timezone) {
-					const offset = timezones.find(tz => tz.value === curTZ.timezone).offset;
-					const dstSetting = DST.find(ds => ds.label === curTZ.dst) || {};
-					let dstOffset = 0;
-	
-					// Figure out if the author is in daylight savings time.
-					if (dstSetting.starts) {
-						// Convert current time to UTC
-						let checkTime = new Date();
-						checkTime.setUTCHours(checkTime.getUTCHours() - offset);
-	
-						let startTime = calculateDate(dstSetting.starts);
-						let endTime = calculateDate(dstSetting.ends);
-	
-						if (startTime < endTime) {
-							if ((startTime < checkTime) && (checkTime < endTime)) {
-								dstOffset = 1;
-							}
-						} else if (startTime > endTime) {
-							if ((checkTime < startTime) || (endTime < checkTime)) {
-								dstOffset = 1;
-							}
-						}
-					}
-
-					if (curTime.match(/pm\b/i)) {
-						ampm = "pm";
-					} else if (curTime.match(/am\b/i)) {
-						ampm = "am";
-					} else if (!curTime.endsWith("utc")) {
-						// Figure out whichever am or pm is next!!!
-						let tmpDate = new Date();
-						tmpDate.setUTCMinutes(0, 0, 0);
-
-						let inputHours = curTime.match(/^\d+/);
-						let curHours = tmpDate.getUTCHours() + offset;
-
-						if ((curHours % 12) > inputHours) {
-							ampm = (curHours >= 12) ? "am" : "pm";
-						} else {
-							ampm = (curHours >= 12) ? "pm" : "am";
-						}
-					}
-
-					curTime = curTime.replace(/^([0-9:]+)[\sa-z]*$/, "$1");
-
-					const splits = curTime.split(":");
-
-					if (splits.length) {
-						if (ampm === "pm") {
-							if (Number(splits[0]) !== 12) {
-								splits[0] = Number(splits[0]) + 12;
-							}
-						} else if (Number(splits[0]) === 12) {
-							splits[0] = 24;
-						}
-					}
-
-					var result = new Date();
-					result.setUTCHours(Number(splits[0]) - offset - dstOffset, splits[1] || 0, 0, 0);
-					results.push([ time, result]);
+					results.push([ time, convertTime(curTime, curTZ) ]);
 				}
 			});
 
@@ -249,6 +189,74 @@ const calculateDate = (dateInfo) => {
 	// Set the time as if we are UTC+0, because the time we're checking against has already been normalized to UTC+0.
 	result.setUTCHours(dateInfo.time, 0, 0, 0);
 
+	return result;
+}
+
+// Convert a time correspondent to its time zone.
+const convertTime = (time, tzInfo) => {
+	let ampm;
+	const offset = timezones.find(tz => tz.value === tzInfo.timezone).offset || 0;
+	const dstSetting = DST.find(ds => ds.label === tzInfo.dst) || {};
+	let dstOffset = 0;
+
+	// Figure out if the input time is in daylight savings time.
+	if (dstSetting.starts) {
+		// Convert current time to UTC
+		let checkTime = new Date();
+		checkTime.setUTCHours(checkTime.getUTCHours() - offset);
+
+		let startTime = calculateDate(dstSetting.starts);
+		let endTime = calculateDate(dstSetting.ends);
+
+		if (startTime < endTime) {
+			if ((startTime < checkTime) && (checkTime < endTime)) {
+				dstOffset = 1;
+			}
+		} else if (startTime > endTime) {
+			if ((checkTime < startTime) || (endTime < checkTime)) {
+				dstOffset = 1;
+			}
+		}
+	}
+
+	if (time.match(/pm\b/i)) {
+		ampm = "pm";
+	} else if (time.match(/am\b/i)) {
+		ampm = "am";
+	} else if (!time.endsWith("utc")) {
+		// Figure out whichever am or pm is next!!!
+		let tmpDate = new Date();
+		tmpDate.setUTCMinutes(0, 0, 0);
+
+		let inputHours = time.match(/^\d+/);
+		let curHours = tmpDate.getUTCHours() + offset;
+
+		if (inputHours) {
+			if ((curHours % 12) > inputHours[0]) {
+				ampm = (curHours >= 12) ? "am" : "pm";
+			} else {
+				ampm = (curHours >= 12) ? "pm" : "am";
+			}
+		}
+	}
+
+	// Finally, we can do the time conversion.
+	time = time.replace(/^([0-9:]+)[\sa-z]*$/, "$1");
+
+	const splits = time.split(":");
+
+	if (splits.length) {
+		if (ampm === "pm") {
+			if (Number(splits[0]) !== 12) {
+				splits[0] = Number(splits[0]) + 12;
+			}
+		} else if (Number(splits[0]) === 12) {
+			splits[0] = 24;
+		}
+	}
+
+	let result = new Date();
+	result.setUTCHours(Number(splits[0]) - offset - dstOffset, splits[1] || 0, 0, 0);
 	return result;
 }
 
