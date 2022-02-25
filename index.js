@@ -108,7 +108,7 @@ client.on("messageCreate", async message => {
 	try {
 		if (message.author.bot) return;
 
-		const finds = message.content.match(/`((([1-9]|1[0-9]|2[0-3])(:[0-5][0-9])?\s?[ap][m])|(([0-9]|1[0-9]|2[0-3]):[0-5][0-9]))( (e[ds]t|c[ds]t|m[ds]t|p[ds]t|utc))?`/gi);
+		const finds = message.content.match(/`((([1-9]|1[0-9]|2[0-3])(:|.[0-5][0-9])?\s?[ap][m])|(([0-9]|1[0-9]|2[0-3]):[0-5][0-9]))( [\w/]+)?`/gi);
 
 		// Keep going if we found any times.
 		if (finds?.length) {
@@ -241,9 +241,13 @@ const convertTime = (time, tzInfo) => {
 	}
 
 	// Finally, we can do the time conversion.
-	time = time.replace(/^([0-9:]+)[\sa-z]*$/, "$1");
+	time = time.replace(/^([0-9:.]+)[\sa-z]*$/, "$1");
 
-	const splits = time.split(":");
+	let splits = time.split(":");
+
+	if (splits.length === 1) {
+		splits = splits[0].split(".");
+	}
 
 	if (splits.length) {
 		if (ampm === "pm") {
