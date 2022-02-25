@@ -108,7 +108,7 @@ client.on("messageCreate", async message => {
 	try {
 		if (message.author.bot) return;
 
-		const finds = message.content.match(/`((([1-9]|1[0-9]|2[0-3])(:|.[0-5][0-9])?\s?[ap][m])|(([0-9]|1[0-9]|2[0-3]):[0-5][0-9]))( [\w/]+)?`/gi);
+		const finds = message.content.match(/`((([1-9]|1[0-9]|2[0-3])(:|.[0-5][0-9])?\s?[ap][m])|(([0-9]|1[0-9]|2[0-3]):[0-5][0-9]))( \(?[\w/-]+( [\w/-]+)*\)?)?`/gi);
 
 		// Keep going if we found any times.
 		if (finds?.length) {
@@ -117,8 +117,8 @@ client.on("messageCreate", async message => {
 
 			// Shift the times to UTC.
 			finds.forEach(time => {
-				let curTime = time.toLowerCase().replace(/`/g, "");
-				let curTZ = tzOverrides.find(tz => curTime.endsWith(tz.key)) || userTZ;
+				let curTime = time.toLowerCase().replace(/`/g, "").replace(/\(/g, "").replace(/\)/g, "");
+				let curTZ = tzOverrides.find(tz => tz.keys.find(curKey => curTime.endsWith(" " + curKey))) || userTZ;
 
 				if (curTZ?.timezone) {
 					results.push([ time, convertTime(curTime, curTZ) ]);
@@ -196,7 +196,8 @@ const calculateDate = (dateInfo) => {
 const convertTime = (time, tzInfo) => {
 	let ampm;
 	const offset = timezones.find(tz => tz.value === tzInfo.timezone).offset || 0;
-	const dstSetting = DST.find(ds => ds.label === tzInfo.dst) || {};
+	const myDST = tzInfo.dst || "";
+	const dstSetting = DST.find(ds => ds.label === myDST) || {};
 	let dstOffset = 0;
 
 	// Figure out if the input time is in daylight savings time.
@@ -241,7 +242,7 @@ const convertTime = (time, tzInfo) => {
 	}
 
 	// Finally, we can do the time conversion.
-	time = time.replace(/^([0-9:.]+)[\sa-z]*$/, "$1");
+	time = time.replace(/^([0-9:.]+).*$/, "$1");
 
 	let splits = time.split(":");
 

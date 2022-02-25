@@ -1,9 +1,13 @@
 :root {
 	--page-background: #181820;
+	--button-color: #182838;
+	--button-border: #687c90;
+	--button-highlight: #c0e0ff;
 	--content-color: #e0e0f0;
 	--content-background: #303038;
-	--inset-background: #505058;
 	--inset-border: #404048;
+	--inset-background: #202024;
+	--inset-header: #505058;
 	--title-background: #a0d0f0;
 }
 
@@ -47,6 +51,21 @@ body {
 	font-family: sans-serif;
 }
 
+button {
+	background-color: var(--title-background);
+	border: solid 2px var(--button-border);
+	border-radius: 12px;
+	color: var(--button-color);
+	cursor: pointer;
+	height: 24px;
+	padding: 2px 8px;
+	white-space: nowrap;
+}
+
+button:hover {
+	background-color: var(--button-highlight);
+}
+
 code {
 	background-color: var(--page-background);
 	border-radius: 4px;
@@ -54,6 +73,10 @@ code {
 	font-weight: bold;
 	padding: 2px 4px 0px 4px;
 	white-space: nowrap;
+}
+
+code[title] {
+	cursor: help;
 }
 
 h1, h2, h3, h4 {
@@ -140,6 +163,50 @@ section:hover h2::after {
 	background-image: url('../images/config-complete.png');
 	height: 502px;
 	width: 1045px;
+}
+
+#tzTable {
+	align-items: stretch;
+	display: flex;
+	flex-direction: column;
+	margin-top: 8px;
+}
+
+#tzTable > div {
+	display: flex;
+}
+
+#tzTable > p {
+	margin-top: 8px;
+}
+
+#tzTable > div.header {
+	background-color: var(--content-background);
+	color: var(--title-background);
+	font-weight: bold;
+}
+
+#tzTable > div > div {
+	border: solid 1px var(--inset-border);
+	padding: 2px 8px;
+}
+
+#tzTable > div:not(:first-child) > div {
+	background-color: var(--inset-background);
+	margin-top: -1px
+}
+
+#tzTable > div > *:first-child {
+	width: 120px;
+}
+
+#tzTable > div > *:last-child {
+	margin-left: -1px;
+	width: calc(100% - 120px);
+}
+
+.hideMe {
+	display: none !important;
 }
 
 @media screen and (max-width: 440px) {

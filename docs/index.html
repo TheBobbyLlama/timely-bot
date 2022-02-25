@@ -21,11 +21,438 @@
 				<div id="bot-demo"></div>
 			</aside>
 			<p>
-				The bot may be used without any other configuration if you supply the time zone when writing a time - <i>e.g.</i> <code>3 PM EST</code>, <code>8:30 PDT</code>, <code>13:00 UTC</code>, and so on.  You can tag as many time entries as you like in a post and Timekeeper will convert them all.
+				The bot may be used without any other configuration if you supply local time when writing a time - <i>e.g.</i> <code>3:30 PM EST</code>, <code>8:30 PDT</code>, <code>13:00 UTC</code>, <code>1AM (London)</code>, <code>12:30 Vancouver</code>and so on.  You can tag as many time entries as you like in a post and Timekeeper will convert them all.
 			</p>
-			<p>
-				The currently supported time zones are as follows: <code>EST</code>/<code>EDT</code>, <code>CST</code>/<code>CDT</code>, <code>MST</code>/<code>MDT</code>, <code>PST</code>/<code>PDT</code>, and <code>UTC</code>.
-			</p>
+			<aside id="showHideHolder" class="hideMe">
+				<button type="button" id="showHide">Show Supported Local Times</button>
+			</aside>
+			<div id="tzTable">
+				<div class="header">
+					<div>Time Zone</div>
+					<div>Valid Tags</div>
+				</div>
+				<div>
+					<div><a href="https://en.wikipedia.org/wiki/UTC%E2%88%9212:00" target="_blank"><strong>Y</strong> [UTC-12]</a></div>
+					<div>
+						<code>Y</code>,
+						<code title="Baker Island Time">BIT</code>,
+						<code title="International Day Line West">IDLW</code>
+					</div>
+				</div>
+				<div>
+					<div><a href="https://en.wikipedia.org/wiki/UTC%E2%88%9211:00" target="_blank"><strong>X</strong> [UTC-11]</a></div>
+					<div>
+						<code>X</code>,
+						<code title="Niue Time">NUT</code>,
+						<code title="Samoa Daylight Time">SDT</code>,
+						<code title="Samoa Standard Time">SST</code>,
+						<code>Samoa</code>
+					</div>
+				</div>
+				<div>
+					<div><a href="https://en.wikipedia.org/wiki/UTC%E2%88%9210:00" target="_blank"><strong>W</strong> [UTC-10]</a></div>
+					<div>
+						<code>W</code>,
+						<code title="Cook Island Time">CKT</code>,
+						<code title="Hawaii–Aleutian Daylight Time">HDT</code>,
+						<code title="Hawaii–Aleutian Standard Time">HST</code>,
+						<code title="Tahiti Time">TAHT</code>,
+						<code>Honolulu</code>
+					</div>
+				</div>
+				<div>
+					<div><a href="https://en.wikipedia.org/wiki/UTC%E2%88%9209:00" target="_blank"><strong>V</strong> [UTC-9]</a></div>
+					<div>
+						<code>V</code>,
+						<code title="Alaska Daylight Time">AKDT</code>,
+						<code title="Alaska Standard Time">AKST</code>,
+						<code title="Gambier Island Time">GIT</code>,
+						<code>Alaska</code>,
+						<code>Anchorage</code>
+					</div>
+				</div>
+				<div>
+					<div><a href="https://en.wikipedia.org/wiki/UTC%E2%88%9208:00" target="_blank"><strong>U</strong> [UTC-8]</a></div>
+					<div>
+						<code>U</code>,
+						<code title="Clipperton Island Standard Time">CIST</code>,
+						<code title="Pacific Daylight Time">PDT</code>,
+						<code title="Pacific Standard Time">PST</code>,
+						<code>Pacific</code>,
+						<code>US Pacific</code>,
+						<code>Los Angeles</code>,
+						<code>Tijuana</code>,
+						<code>Vancouver</code>
+					</div>
+				</div>
+				<div>
+					<div><a href="https://en.wikipedia.org/wiki/UTC%E2%88%9207:00" target="_blank"><strong>T</strong> [UTC-7]</a></div>
+					<div>
+						<code>T</code>,
+						<code title="Mountain Daylight Time">MDT</code>,
+						<code title="Mountain Standard Time">MST</code>,
+						<code>Mountain</code>,
+						<code>US Mountain</code>,
+						<code title="&quot;Ciudad Juarez&quot; will also be accepted.">Ciudad Juárez</code>,
+						<code>Denver</code>,
+						<code>Edmonton</code>,
+						<code title="&quot;Juarez&quot; will also be accepted.">Juárez</code>
+					</div>
+				</div>
+				<div>
+					<div><a href="https://en.wikipedia.org/wiki/UTC%E2%88%9206:00" target="_blank"><strong>S</strong> [UTC-6]</a></div>
+					<div>
+						<code>S</code>,
+						<code title="Central Daylight Time">CDT</code>,
+						<code title="Central Standard Time">CST</code>,
+						<code title="Easter Island Summer Time">EASST</code>,
+						<code title="Easter Island Standard Time">EAST</code>,
+						<code title="Galápagos Time">GALT</code>,
+						<code>Central</code>,
+						<code>US Central</code>,
+						<code>Chicago</code>,
+						<code>Guatemala City</code>,
+						<code title="&quot;San Jose&quot; will also be accepted.">San José</code>,
+						<code>San Salvador</code>,
+						<code>Tegucigulpa</code>,
+						<code>Winnipeg</code>
+					</div>
+				</div>
+				<div>
+					<div><a href="https://en.wikipedia.org/wiki/UTC%E2%88%9205:00" target="_blank"><strong>R</strong> [UTC-5]</a></div>
+					<div>
+						<code>R</code>,
+						<code title="Acre Time">ACT</code>
+						<code title="Colombia Time">COT</code>,
+						<code title="Ecuador Time">ECT</code>,
+						<code title="Eastern Daylight Time">EDT</code>
+						<code title="Eastern Standard TIme">EST</code>
+						<code title="Peru Time">PET</code>,
+						<code>Eastern</code>,
+						<code>US Eastern</code>,
+						<code title="&quot;Bogota&quot; will also be accepted.">Bogotá</code>,
+						<code>Cuba</code>,
+						<code>Havana</code>,
+						<code>Kingston</code>,
+						<code>Lima</code>,
+						<code>New York</code>,
+						<code>Quito</code>,
+						<code>Toronto</code>
+					</div>
+				</div>
+				<div>
+					<div><a href="https://en.wikipedia.org/wiki/UTC%E2%88%9204:00" target="_blank"><strong>Q</strong> [UTC-4]</a></div>
+					<div>
+						<code>Q</code>,
+						<code title="Amazon Time (Brazil)">AMT</code>,
+						<code title="Bolivia Time">BOT</code>,
+						<code title="Chile Standard Time">CLT</code>,
+						<code title="Chile Summer Time">CLST</code>,
+						<code title="Falkland Islands Time">FKT</code>,
+						<code title="Paraguay Summer Time">PYST</code>,
+						<code title="Paraguay Time">PYT</code>,
+						<code title="Venezuelan Standard Time">VET</code>,
+						<code>Caracas</code>,
+						<code>Halifax</code>,
+						<code>La Paz</code>,
+						<code>Manaus</code>,
+						<code>Santiago</code>,
+						<code>Santo Domingo</code>
+					</div>
+				</div>
+				<div>
+					<div><a href="https://en.wikipedia.org/wiki/UTC%E2%88%9203:00" target="_blank"><strong>P</strong> [UTC-3]</a></div>
+					<div>
+						<code>P</code>,
+						<code title="Atlantic Daylight Time">ADT</code>,
+						<code title="Amazon Summer Time">AMST</code>,
+						<code title="Argentina Time">ART</code>,
+						<code title="Brasília Time">BRT</code>,
+						<code title="Falkland Islands Summer Time">FKST</code>,
+						<code title="French Guiana Time">GFT</code>,
+						<code title="Saint Pierre and Miquelon Daylight Time">PMDT</code>,
+						<code title="Saint Pierre and Miquelon Standard Time">PMST</code>,
+						<code title="Rothera Research Station Time">ROTT</code>,
+						<code title="Uruguay Standard Time">UYT</code>,
+						<code>Buenos Aires</code>,
+						<code>Montevideo</code>,
+						<code title="&quot;Sao Paulo&quot; will also be accepted.">São Paulo</code>
+					</div>
+				</div>
+				<div>
+					<div><a href="https://en.wikipedia.org/wiki/UTC%E2%88%9202:00" target="_blank"><strong>O</strong> [UTC-2]</a></div>
+					<div>
+						<code>O</code>,
+						<code title="Brasília Summer Time">BRST</code>,
+						<code title="Fernando de Noronha Time">FNT</code>
+					</div>
+				</div>
+				<div>
+					<div><a href="https://en.wikipedia.org/wiki/UTC%E2%88%9201:00" target="_blank"><strong>N</strong> [UTC-1]</a></div>
+					<div>
+						<code>N</code>,
+						<code title="Azores Standard Time">AZOT</code>,
+						<code title="Cape Verde Time">CVT</code>
+					</div>
+				</div>
+				<div>
+					<div><a href="https://en.wikipedia.org/wiki/UTC%C2%B100:00" target="_blank"><strong>Z</strong> [UTC+0]</a></div>
+					<div>
+						<code>Z</code>,
+						<code title="Azores Summer Time">AZOST</code>
+						<code title="British Summer Time">BST</code>,
+						<code title="Greenwich Mean Time">GMT</code>,
+						<code title="Coordinated Universal Time">UTC</code>,
+						<code title="Western European Time">WET</code>,
+						<code title="Western European Summer Time">WEST</code>,
+						<code>Zulu</code>,
+						<code>Abidjan</code>,
+						<code>Accra</code>,
+						<code>Dakar</code>,
+						<code>Dublin</code>,
+						<code>Lisbon</code>,
+						<code>London</code>
+					</div>
+				</div>
+				<div>
+					<div><a href="https://en.wikipedia.org/wiki/UTC%2B01:00" target="_blank"><strong>A</strong> [UTC+1]</a></div>
+					<div>
+						<code>A</code>,
+						<code title="Central European Time">CET</code>,
+						<code title="Central European Summer Time">CEST</code>,
+						<code title="AIX-specific equivalent of Central European Time">DFT</code>,
+						<code title="Middle European Time">MET</code>,
+						<code title="Middle European Summer Time">MEST</code>,
+						<code title="West Africa Time">WAT</code>,
+						<code>Algiers</code>,
+						<code>Berlin</code>,
+						<code>Casablanca</code>,
+						<code>Kinshasa</code>,
+						<code>Lagos</code>,
+						<code>Madrid</code>,
+						<code>Paris</code>,
+						<code>Rome</code>,
+						<code>Warsaw</code>
+					</div>
+				</div>
+				<div>
+					<div><a href="https://en.wikipedia.org/wiki/UTC%2B02:00" target="_blank"><strong>B</strong> [UTC+2]</a></div>
+					<div>
+						<code>B</code>,
+						<code title="Central Africa Time">CAT</code>,
+						<code title="Eastern European Summer Time">EEST</code>,
+						<code title="Eastern European Time">EET</code>,
+						<code title="Heure Avancée d'Europe Centrale">HAEC</code>,
+						<code title="Israel Daylight Time">IDT</code>,
+						<code title="Israel Standard Time">IST</code>,
+						<code title="Kaliningrad Time">KALT</code>,
+						<code title="South African Standard Time">SAST</code>,
+						<code title="West Africa Summer Time">WAST</code>,
+						<code>Athens</code>,
+						<code>Bucharest</code>,
+						<code>Cairo</code>,
+						<code>Israel</code>,
+						<code>Jerusalem</code>,
+						<code>Johannesburg</code>,
+						<code>Khartoum</code>,
+						<code>Kyiv</code>,
+						<code>Sofia</code>
+					</div>
+				</div>
+				<div>
+					<div><a href="https://en.wikipedia.org/wiki/UTC%2B03:00" target="_blank"><strong>C</strong> [UTC+3]</a></div>
+					<div>
+						<code>C</code>,
+						<code title="East Africa Time">EAT</code>,
+						<code title="Further-eastern European Time">FET</code>,
+						<code title="Indian Ocean Time">IOT</code>,
+						<code title="Moscow Time">MSK</code>,
+						<code title="Showa Station Time">SYOT</code>,
+						<code title="Turkey Time">TRT</code>,
+						<code>Addis Ababa</code>,
+						<code>Baghdad</code>,
+						<code>Doha</code>,
+						<code>Istanbul</code>,
+						<code>Turkey</code>,
+						<code>Moscow</code>,
+						<code>Riyadh</code>
+					</div>
+				</div>
+				<div>
+					<div><a href="https://en.wikipedia.org/wiki/UTC%2B04:00" target="_blank"><strong>D</strong> [UTC+4]</a></div>
+					<div>
+						<code>D</code>,
+						<code title="Azerbaijan Time">AZT</code>,
+						<code title="Georgia Standard Time">GET</code>,
+						<code title="Gulf Standard Time">GST</code>,
+						<code title="Mauritius Time">MUT</code>,
+						<code title="Réunion Time">RET</code>,
+						<code title="Samara Time">SAMT</code>,
+						<code title="Seychelles Time">SCT</code>,
+						<code title="Volgograd Time">VOLT</code>,
+						<code>Baku</code>,
+						<code>Dubai</code>,
+						<code>Samara</code>,
+						<code>Tbilisi</code>,
+						<code>Yerevan</code>
+					</div>
+				</div>
+				<div>
+					<div><a href="https://en.wikipedia.org/wiki/UTC%2B05:00" target="_blank"><strong>E</strong> [UTC+5]</a></div>
+					<div>
+						<code>E</code>,
+						<code title="Aqtobe Time">AQTT</code>,
+						<code title="Heard and McDonald Islands Time">HMT</code>,
+						<code title="Mawson Station Time">MAWT</code>,
+						<code title="Maldives Time">MVT</code>,
+						<code title="Oral Time">ORAT</code>,
+						<code title="Pakistan Standard Time">PKT</code>,
+						<code title="French Southern and Antarctic Time">TFT</code>,
+						<code title="Tajikistan Time">TJT</code>,
+						<code title="Turkmenistan Time">TMT</code>,
+						<code title="Uzbekistan Time">UZT</code>,
+						<code title="Yekaterinburg Time">YEKT</code>,
+						<code>Karachi</code>,
+						<code>Tashkent</code>,
+						<code>Yekaterinburg</code>
+					</div>
+				</div>
+				<div>
+					<div><a href="https://en.wikipedia.org/wiki/UTC%2B06:00" target="_blank"><strong>F</strong> [UTC+6]</a></div>
+					<div>
+						<code>F</code>,
+						<code title="Alma-Ata Time">ALMT</code>,
+						<code title="British Indian Ocean Time">BIOT</code>,
+						<code title="Bhutan Time">BTT</code>,
+						<code title="Kyrgyzstan Time">KGT</code>,
+						<code title="Omsk Time">OMST</code>,
+						<code title="Vostok Station Time">VOST</code>,
+						<code>Almaty</code>,
+						<code>Dhaka</code>,
+						<code>Omsk</code>
+					</div>
+				</div>
+				<div>
+					<div><a href="https://en.wikipedia.org/wiki/UTC%2B07:00" target="_blank"><strong>G</strong> [UTC+7]</a></div>
+					<div>
+						<code>G</code>,
+						<code title="Christmas Island Time">CXT</code>,
+						<code title="Davis Time">DAVT</code>,
+						<code title="Hovd Time">HOVT</code>,
+						<code title="Indochina Time">ICT</code>,
+						<code title="Krasnoyarsk Time">KRAT</code>,
+						<code title="Novosibirsk Time">NOVT</code>,
+						<code title="Thailand Standard Time">THA</code>,
+						<code title="Western Indonesian Time">WIB</code>,
+						<code>Bangkok</code>,
+						<code>Ho Chi Minh City</code>,
+						<code>Jakarta</code>,
+						<code>Krasnoyarsk</code>
+					</div>
+				</div>
+				<div>
+					<div><a href="https://en.wikipedia.org/wiki/UTC%2B08:00" target="_blank"><strong>H</strong> [UTC+8]</a></div>
+					<div>
+						<code>H</code>,
+						<code title="Australian Western Standard Time">AWST</code>,
+						<code title="Brunei Time">BNT</code>,
+						<code title="Choibalsan Standard Time">CHOT</code>,
+						<code title="Hong Kong Time">HKT</code>,
+						<code title="Irkutsk Time">IRKT</code>,
+						<code title="Malaysia Time">MYT</code>,
+						<code title="Philippine Time">PHT</code>,
+						<code title="Philippine Standard Time">PHST</code>,
+						<code title="Singapore Time">SGT</code>,
+						<code title="Ulaanbaatar Standard Time">ULAT</code>,
+						<code title="Western Standard Time">WST</code>,
+						<code>Hong Kong</code>,
+						<code>Irkutsk</code>,
+						<code>Kuala Lumpur</code>,
+						<code>Makassar</code>,
+						<code>Manila</code>,
+						<code>Perth</code>,
+						<code>Shanghai</code>,
+						<code>Singapore</code>,
+						<code>Taipei</code>,
+						<code>Western Australia</code>
+					</div>
+				</div>
+				<div>
+					<div><a href="https://en.wikipedia.org/wiki/UTC%2B09:00" target="_blank"><strong>I</strong> [UTC+9]</a></div>
+					<div>
+						<code>I</code>,
+						<code title="Choibalsan Summer Time">CHOST</code>,
+						<code title="Japan Standard Time">JST</code>,
+						<code title="Korea Standard Time">KST</code>,
+						<code title="Palau Time">PWT</code>,
+						<code title="Timor Leste Time">TLT</code>,
+						<code title="Eastern Indonesian Time">WIT</code>,
+						<code title="Yakutsk Time">YAKT</code>,
+						<code>Ambon</code>,
+						<code>Chita</code>,
+						<code>Pyongyang</code>,
+						<code>Seoul</code>,
+						<code>Tokyo</code>
+					</div>
+				</div>
+				<div>
+					<div><a href="https://en.wikipedia.org/wiki/UTC%2B10:00" target="_blank"><strong>K</strong> [UTC+10]</a></div>
+					<div>
+						<code>K</code>,
+						<code title="Australian Eastern Daylight Saving Time">AEDT</code>,
+						<code title="Australian Eastern Standard Time">AEST</code>,
+						<code title="Chuuk Time">CHUT</code>,
+						<code title="Dumont d'Urville Time">DDUT</code>,
+						<code title="Papua New Guinea Time">PGT</code>,
+						<code title="Vladivostok Time">VLAT</code>,
+						<code>Eastern Australia</code>,
+						<code>Port Moresby</code>,
+						<code>Sydney</code>,
+						<code>Vladivostok</code>
+					</div>
+				</div>
+				<div>
+					<div><a href="https://en.wikipedia.org/wiki/UTC%2B11:00" target="_blank"><strong>L</strong> [UTC+11]</a></div>
+					<div>
+						<code>L</code>,
+						<code title="Kosrae Time">KOST</code>,
+						<code title="Lord Howe Summer Time">LHST</code>,
+						<code title="Macquarie Island Station Time">MIST</code>,
+						<code title="New Caledonia Time">NCT</code>,
+						<code title="Norfolk Island Time">NFT</code>,
+						<code title="Pohnpei Standard Time">PONT</code>,
+						<code title="Sakhalin Island Time">SAKT</code>,
+						<code title="Solomon Islands Time">SBT</code>,
+						<code title="&quot;Noumea&quot; will also be accepted.">Nouméa</code>
+					</div>
+				</div>
+				<div>
+					<div><a href="https://en.wikipedia.org/wiki/UTC%2B12:00" target="_blank"><strong>M</strong> [UTC+12]</a></div>
+					<div>
+						<code>M</code>,
+						<code title="Anadyr Time">ANAT</code>,
+						<code title="Fiji Time">FJT</code>,
+						<code title="Gilbert Island Time">GILT</code>,
+						<code title="Magadan Time">MAGT</code>,
+						<code title="Marshall Islands Time">MHT</code>,
+						<code title="New Zealand Daylight Time">NZDT</code>,
+						<code title="New Zealand Standard Time">NZST</code>,
+						<code title="New Zealand Time">NZT</code>,
+						<code title="Kamchatka Time">PETT</code>,
+						<code title="Tuvalu Time">TVT</code>,
+						<code title="Vanuatu Time">VUT</code>,
+						<code title="Wake Island Time">WAKT</code>
+						<code>Auckland</code>,
+						<code>New Zealand</code>,
+						<code>Petropavlovsk</code>,
+						<code>Petropavlovsk-Kamchatsky</code>,
+						<code>Suva</code>
+					</div>
+				</div>
+				<p>
+					Daylight savings is calculated automatically for the appropriate local times.
+				</p>
+			</div>
 		</section>
 		<section>
 			<h2>Automatic Time Conversion</h2>
@@ -52,4 +479,19 @@
 			</p>
 		</section>
 	</body>
+	<script type="text/javascript">
+		const tzTable = document.querySelector("#tzTable");
+
+		document.querySelector("#showHide").addEventListener("click", () => {
+			if (tzTable.className) {
+				tzTable.className = "";
+			} else {
+				tzTable.className = "hideMe";
+			}
+		});
+
+		// Set visibility manually so users with script turned off can still see things.
+		tzTable.className="hideMe";
+		document.querySelector("#showHideHolder").className = "";
+	</script>
 </html>
