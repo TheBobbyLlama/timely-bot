@@ -5,7 +5,7 @@ const { Routes } = require('discord-api-types/v9');
 require("dotenv").config();
 
 const commands = [
-	new SlashCommandBuilder().setName("timekeeper").setDescription("Configure Timekeeper bot for your time zone and your country's daylight savings time.")
+	new SlashCommandBuilder().setName("timely").setDescription("Configure Timely bot for your time zone and your country's daylight savings time.")
 ].map(command => command.toJSON());
 
 const registerCommands = async () => {

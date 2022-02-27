@@ -93,7 +93,7 @@ h1 {
 }
 
 h1::before {
-	background: url('../images/Timekeeper.png');
+	background: url('../images/Timely.png');
 	background-size: cover;
 	content: ' ';
 	display: inline-block;
@@ -155,14 +155,8 @@ section:hover h2::after {
 
 #config-blank {
 	background-image: url('../images/config-blank.png');
-	height: 348px;
-	width: 1027px;
-}
-
-#config-complete {
-	background-image: url('../images/config-complete.png');
-	height: 502px;
-	width: 1045px;
+	height: 339px;
+	width: 1026px;
 }
 
 #tzTable {

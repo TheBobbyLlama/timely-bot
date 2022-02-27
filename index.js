@@ -5,10 +5,10 @@ const DST = require("./DST.json");
 const tzOverrides = require("./timezoneOverrides.json");
 require("dotenv").config();
 
-const timezonePrefix = "timekeeperTZ";
-const dstPrefix = "timekeeperDST";
+const timezonePrefix = "timelyTZ";
+const dstPrefix = "timelyDST";
 
-const setupMessage = "Please configure your time zone and daylight savings settings with the dropdowns below.  Your settings will be used across all servers that use Timekeeper, so you will only ever have to do this once!";
+const setupMessage = "Please configure your time zone and daylight savings settings with the dropdowns below.  Your settings will be used across all servers that use Timely, so you will only ever have to do this once!";
 
 let database = null;
 
@@ -41,7 +41,7 @@ client.once('ready', () => {
 client.on("interactionCreate", async interaction => {
 	if (!interaction.isCommand()) return;
 
-	if (interaction.commandName === "timekeeper") {
+	if (interaction.commandName === "timely") {
 		let rows = [];
 
 		const userTZ = (await getUserInfo(interaction.user.id) || {});
@@ -63,11 +63,11 @@ client.on("interactionCreate", async interaction => {
 		));
 
 		const docEmbed = new MessageEmbed()
-							.setTitle("Timekeeper Documentation")
+							.setTitle("Timely Documentation")
 							.setDescription("More information on how the bot works can be found here.")
-							.setThumbnail("https://thebobbyllama.github.io/timekeeper-bot/assets/images/Timekeeper.png")
+							.setThumbnail("https://thebobbyllama.github.io/timely-bot/assets/images/Timely.png")
 							.setAuthor({ name: "The Bobby Llama", url: "https://discordapp.com/users/288977733390696448/" })
-							.setURL("https://thebobbyllama.github.io/timekeeper-bot/");
+							.setURL("https://thebobbyllama.github.io/timely-bot/");
 
 		await interaction.reply({ content: setupMessage, components: rows, embeds: [ docEmbed ], ephemeral: true });
 	} else {
@@ -80,14 +80,14 @@ client.on("interactionCreate", async interaction => {
 	if (!interaction.isSelectMenu()) return;
 
 	try {
-		if (((interaction.message.interaction.commandName === "timekeeper") || (interaction.message.interaction.name === "timekeeper")) && (interaction.values[0])) {
+		if (((interaction.message.interaction.commandName === "timely") || (interaction.message.interaction.name === "timely")) && (interaction.values[0])) {
 			let interactionData = interaction.values[0].split(":");
 
 			switch (interactionData[0]) {
 				case timezonePrefix:
 					let tzValue = interactionData[1];
 					await database.ref("users/" + interaction.user.id + "/timezone").set(tzValue);
-					await interaction.reply({ content: "Timezone set to `" + timezones.find(tz => tz.value === tzValue).label + "`\n\nTimekeeper will now reply to any of your posts containing times and convert them into Discord timestamps.", ephemeral: true })
+					await interaction.reply({ content: "Timezone set to `" + timezones.find(tz => tz.value === tzValue).label + "`\n\nTimely will now reply to any of your posts containing times and convert them into Discord timestamps.", ephemeral: true })
 					break;
 				case dstPrefix:
 					let dsValue = interactionData[1];
