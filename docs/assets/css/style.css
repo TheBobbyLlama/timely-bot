@@ -149,14 +149,14 @@ section:hover h2::after {
 
 #bot-demo {
 	background-image: url('../images/bot-demo.png');
-	height: 145px;
-	width: 495px;
+	height: 148px;
+	width: 485px;
 }
 
 #config-blank {
 	background-image: url('../images/config-blank.png');
-	height: 339px;
-	width: 1026px;
+	height: 344px;
+	width: 1019px;
 }
 
 #tzTable {
