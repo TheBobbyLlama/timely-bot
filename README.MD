@@ -13,3 +13,7 @@ If you would like to use the bot for local times without having to specify your 
 ![Timely Configuration](https://thebobbyllama.github.io/timely-bot/assets/images/config-blank.png)
 
 Once you have set yourself up, you may omit the time zone from any times you tag and Timely will convert them from your local time - *e.g.* `3 PM`, `8:30`
+
+## Add the Bot to Your Server!
+
+https://discord.com/api/oauth2/authorize?client_id=940552993609240616&permissions=2048&scope=bot%20applications.commands
