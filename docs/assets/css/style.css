@@ -59,6 +59,7 @@ button {
 	cursor: pointer;
 	height: 24px;
 	padding: 2px 8px;
+	transition: .2s ease-in-out;
 	white-space: nowrap;
 }
 
@@ -220,6 +221,22 @@ section:hover h2::after {
 #tzTable > div > *:last-child {
 	margin-left: -1px;
 	width: calc(100% - 120px);
+}
+
+.botLink a {
+	background-color: var(--page-background);
+	border: solid 1px var(--inset-border);
+	border-radius: 32px;
+	display: block;
+	font-size: 20px;
+	margin: 10px 0;
+	padding: 20px;
+	transition: .2s ease-in-out;
+}
+
+.botLink a:hover {
+	background-color: var(--inset-background);
+	color: var(--title-background);
 }
 
 .hideMe {
