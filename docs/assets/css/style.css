@@ -66,6 +66,29 @@ button:hover {
 	background-color: var(--button-highlight);
 }
 
+a.discord {
+	align-items: center;
+	background-color: #5865f2;
+	background-size: 15%;
+	background-image: url('../images/Discord-Logo-White.png');
+	background-position: 18px center;
+	background-repeat: no-repeat;
+	border-radius: 30px;
+	color: white;
+	display: inline-flex;
+	font-size: 24px;
+	font-weight: bold;
+	justify-content: center;
+	height: 60px;
+	padding: 0 18px 0 72px;
+	text-decoration: none;
+	transition: 0.2s ease-in-out;
+}
+
+a.discord:hover {
+	background-color: hsl(235,86.1%,71.8%);
+}
+
 code {
 	background-color: var(--page-background);
 	border-radius: 4px;
