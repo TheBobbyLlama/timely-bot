@@ -214,7 +214,7 @@ const convertTime = (time, tzInfo) => {
 				dstOffset = 1;
 			}
 		} else if (startTime > endTime) {
-			if ((checkTime < startTime) || (endTime < checkTime)) {
+			if ((checkTime < endTime) || (checkTime > startTime)) {
 				dstOffset = 1;
 			}
 		}
