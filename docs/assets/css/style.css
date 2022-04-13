@@ -183,6 +183,11 @@ section:hover h2::after {
 	width: 1019px;
 }
 
+#server-status {
+	font-style: italic;
+	text-align: center;
+}
+
 #tzTable {
 	align-items: stretch;
 	display: flex;

@@ -12,6 +12,7 @@
 	</head>
 	<body>
 		<h1>Timely</h1>
+		<div id="server-status"></div>
 		<section>
 			<h2>What is Timely?</h2>
 			<p>
@@ -496,5 +497,15 @@
 		// Set visibility manually so users with script turned off can still see things.
 		tzTable.className="hideMe";
 		document.querySelector("#showHideHolder").className = "";
+
+		fetch("https://timekeeper-bot-default-rtdb.firebaseio.com/status.json").then(response => {
+			if (response.ok) {
+				return response.json();
+			}
+		}).then(data => {
+			if (data?.serverCount) {
+				document.querySelector("#server-status").textContent = `Active in ${data.serverCount} Servers`;
+			}
+		})
 	</script>
 </html>

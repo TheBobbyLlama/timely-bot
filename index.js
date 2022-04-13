@@ -34,6 +34,8 @@ client.once('ready', () => {
 
 	database = firebaseAdmin.database();
 
+	setStatus();
+
 	console.log("Running!");
 });
 
@@ -266,11 +268,12 @@ const convertTime = (time, tzInfo) => {
 }
 
 const setStatus = () => {
-	client.user.setActivity({ name:`the time on ${client.guilds.cache.size} servers`, type: "WATCHING" });
+	const guildCount = client.guilds.cache.size;
+	client.user.setActivity({ name:`the time on ${guildCount} servers`, type: "WATCHING" });
+	database.ref("status/serverCount").set(guildCount);
 }
 
 // Log the bot into Discord.
 client.login(process.env.BOT_TOKEN).then(() => {
 	setInterval(setStatus, 3600000);  // Update status once per hour.
-	setStatus();
 });
