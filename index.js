@@ -1,5 +1,6 @@
 const firebaseAdmin = require("firebase-admin");
 const { Client, Intents, MessageActionRow, MessageSelectMenu, MessageEmbed } = require("discord.js");
+const deployCommands = require("./deploy-commands.js");
 const timezones = require("./timezones.json");
 const DST = require("./DST.json");
 const tzOverrides = require("./timezoneOverrides.json");
@@ -275,5 +276,6 @@ const setStatus = () => {
 
 // Log the bot into Discord.
 client.login(process.env.BOT_TOKEN).then(() => {
+	deployCommands.registerCommands();
 	setInterval(setStatus, 3600000);  // Update status once per hour.
 });
