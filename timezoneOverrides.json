@@ -46,7 +46,7 @@
 		"dst": "Mexico"
 	},
 	{
-		"keys": [ "pdt", "pst", "pacific", "us pacific", "los angeles", "vancouver" ],
+		"keys": [ "pdt", "pst", "pt", "pacific", "us pacific", "los angeles", "vancouver"],
 		"timezone": "U",
 		"dst": "US & Canada"
 	},
@@ -81,7 +81,7 @@
 		"dst": "Mexico"
 	},
 	{
-		"keys": [ "cdt", "cst", "central", "us central", "chicago", "winnipeg" ],
+		"keys": [ "cdt", "cst", "ct", "central", "us central", "chicago", "winnipeg" ],
 		"timezone": "S",
 		"dst": "US & Canada"
 	},
@@ -96,7 +96,7 @@
 		"dst": "Cuba"
 	},
 	{
-		"keys": [ "edt", "est", "eastern", "us eastern", "new york", "toronto" ],
+		"keys": [ "edt", "est", "et", "eastern", "us eastern", "new york", "toronto" ],
 		"timezone": "R",
 		"dst": "US & Canada"
 	},
