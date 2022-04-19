@@ -4,11 +4,11 @@ FROM node:latest
 RUN mkdir -p /usr/src/bot
 WORKDIR /usr/src/bot
 
-# install dependencies
+# Install dependencies
 COPY package.json /usr/src/bot
 RUN npm install
 
-# copy rest of the files
+# Copy rest of the files
 COPY . /usr/src/bot
 
 # Start the bot

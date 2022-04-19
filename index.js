@@ -9,7 +9,7 @@ require("dotenv").config();
 const timezonePrefix = "timelyTZ";
 const dstPrefix = "timelyDST";
 
-const setupMessage = `Please configure your time zone and daylight savings settings with the dropdowns below.  Your settings will be used across all servers that use ${process.env.BOT_NAME}, so you will only ever have to do this once!`;
+const setupMessage = "Please configure your time zone and daylight savings settings with the dropdowns below.  Your settings will be used across all servers that use" + process.env.BOT_NAME + ", so you will only ever have to do this once!";
 
 let database = null;
 
@@ -90,7 +90,7 @@ client.on("interactionCreate", async interaction => {
 				case timezonePrefix:
 					let tzValue = interactionData[1];
 					await database.ref("users/" + interaction.user.id + "/timezone").set(tzValue);
-					await interaction.reply({ content: "Timezone set to `" + timezones.find(tz => tz.value === tzValue).label + `\`\`\n\n${process.env.BOT_NAME} will now reply to any of your posts containing times and convert them into Discord timestamps.`, ephemeral: true })
+					await interaction.reply({ content: "Timezone set to `" + timezones.find(tz => tz.value === tzValue).label + "`\n\n" + process.env.BOT_NAME + "will now reply to any of your posts containing times and convert them into Discord timestamps.", ephemeral: true })
 					break;
 				case dstPrefix:
 					let dsValue = interactionData[1];
