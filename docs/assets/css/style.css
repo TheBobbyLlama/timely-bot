@@ -103,6 +103,13 @@ code[title] {
 	cursor: help;
 }
 
+footer {
+	border-top: solid 1px var(--content-background);
+	margin: 20px 20% 0 20%;
+	padding: 20px 0;
+	text-align: center;
+}
+
 h1, h2, h3, h4 {
 	color: var(--title-background);
 	font-family: 'Roboto', sans-serif;
@@ -124,6 +131,14 @@ h1::before {
 	height: 72px;
 	margin-right: 12px;
 	width: 72px;
+}
+
+li {
+	margin: 2px 0 2px 24px;
+}
+
+ol, ol + *, ul, ul + * {
+	margin-top: 10px;
 }
 
 p + p {
@@ -246,6 +261,12 @@ section:hover h2::after {
 
 .hideMe {
 	display: none !important;
+}
+
+.supplemental {
+	font-style: italic;
+	opacity: 0.8;
+	text-align: center;
 }
 
 @media screen and (max-width: 440px) {
