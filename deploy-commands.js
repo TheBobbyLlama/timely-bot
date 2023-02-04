@@ -5,10 +5,10 @@ const { Routes } = require('discord-api-types/v9');
 require("dotenv").config();
 
 const commands = [
-	new SlashCommandBuilder().setName("timely").setDescription("Configure Timely bot for your time zone and your country's daylight savings time.")
+	new SlashCommandBuilder().setName(process.env.BOT_NAME.toLowerCase()).setDescription(`Configure ${process.env.BOT_NAME} bot for your time zone and your country's daylight savings time.`)
 ].map(command => command.toJSON());
 
-const registerCommands = async () => {
+module.exports.registerCommands = async () => {
 	const rest = new REST({ version: '9' }).setToken(process.env.BOT_TOKEN);
 
 	await rest.put(
@@ -16,7 +16,5 @@ const registerCommands = async () => {
 		{ body: commands },
 	);
 
-	console.log("Finished!");
+	console.log("Registered slash commands!");
 }
-
-registerCommands();
