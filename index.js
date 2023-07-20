@@ -234,12 +234,12 @@ const convertTime = (time, tzInfo) => {
 		let inputHours = time.match(/^\d+/);
 		let curHours = tmpDate.getUTCHours() + offset;
 
-		if (inputHours) {
-			if ((curHours % 12) > inputHours[0]) {
-				ampm = (curHours >= 12) ? "am" : "pm";
-			} else {
-				ampm = (curHours >= 12) ? "pm" : "am";
-			}
+		// Handle 24hr time
+		if (inputHours >= 12) {
+			ampm = "pm"
+			time = time.replace(/^\d+/, inputHours % 12)
+		} else {
+			ampm = "am"
 		}
 	}
 
