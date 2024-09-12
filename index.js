@@ -9,7 +9,7 @@ require("dotenv").config();
 const timezonePrefix = "timelyTZ";
 const dstPrefix = "timelyDST";
 
-const setupMessage = "Please configure your time zone and daylight savings settings with the dropdowns below.  Your settings will be used across all servers that use" + process.env.BOT_NAME + ", so you will only ever have to do this once!";
+const setupMessage = "Please configure your time zone and daylight savings settings with the dropdowns below.  Your settings will be used across all servers that use " + process.env.BOT_NAME + ", so you will only ever have to do this once!";
 
 let database = null;
 
