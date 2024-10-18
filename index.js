@@ -1,14 +1,14 @@
 const firebaseAdmin = require("firebase-admin");
 const { Client, Intents, MessageActionRow, MessageSelectMenu, MessageEmbed } = require("discord.js");
 const timezones = require("./timezones.json");
-const DST = require("./DST.json");
+const localeSettings = require("./locales.json");
 const tzOverrides = require("./timezoneOverrides.json");
 require("dotenv").config();
 
 const timezonePrefix = "timelyTZ";
-const dstPrefix = "timelyDST";
+const localePrefix = "timelyLocale";
 
-const setupMessage = "Please configure your time zone and daylight savings settings with the dropdowns below.  Your settings will be used across all servers that use Timely, so you will only ever have to do this once!";
+const setupMessage = "Please configure your time zone and locale settings with the dropdowns below.  Your settings will be used across all servers that use Timely, so you will only ever have to do this once!";
 
 let database = null;
 
@@ -61,7 +61,7 @@ client.on("interactionCreate", async interaction => {
 			new MessageSelectMenu()
 				.setCustomId("select2")
 				.setPlaceholder("Additional Locale Settings")
-				.addOptions(DST.map(ds => { return { label: ds.label, value: dstPrefix + ":" + ds.label, default: userTZ.dst === ds.label }}))
+				.addOptions(localeSettings.map(locale => { return { label: locale.label, value: localePrefix + ":" + locale.label, default: userTZ.dst === locale.label }}))
 		));
 
 		const docEmbed = new MessageEmbed()
@@ -91,10 +91,10 @@ client.on("interactionCreate", async interaction => {
 					await database.ref("users/" + interaction.user.id + "/timezone").set(tzValue);
 					await interaction.reply({ content: "Timezone set to `" + timezones.find(tz => tz.value === tzValue).label + "`\n\nTimely will now reply to any of your posts containing times and convert them into Discord timestamps.", ephemeral: true })
 					break;
-				case dstPrefix:
-					let dsValue = interactionData[1];
-					await database.ref("users/" + interaction.user.id + "/dst").set(dsValue);
-					await interaction.reply({ content: "Daylight savings will be calculated to `" + dsValue + "` standards.", ephemeral: true });
+				case localePrefix:
+					let localeValue = interactionData[1];
+					await database.ref("users/" + interaction.user.id + "/dst").set(localeValue);
+					await interaction.reply({ content: "Locale settings changed to `" + localeValue + "`", ephemeral: true });
 					break;
 				default:
 					throw new Error("Invalid selection.");
@@ -152,7 +152,7 @@ const getUserInfo = async (userId) => {
 	});
 }
 
-// Use DST data to figure out a date (last Sunday in March, first Sunday in October, and so on)
+// Use locale data to figure out a date (last Sunday in March, first Sunday in October, and so on)
 const calculateDate = (dateInfo) => {
 	let result = new Date();
 	result.setUTCHours(0, 0, 0, 0);
@@ -198,26 +198,26 @@ const calculateDate = (dateInfo) => {
 const convertTime = (time, tzInfo) => {
 	let ampm;
 	const offset = timezones.find(tz => tz.value === tzInfo.timezone).offset || 0;
-	const myDST = tzInfo.dst || "";
-	const dstSetting = DST.find(ds => ds.label === myDST) || {};
+	const myLocale = tzInfo.dst || "";
+	const localeSetting = localeSettings.find(loc => loc.label === myLocale) || {};
 	let dstOffset = 0;
 
 	// Figure out if the input time is in daylight savings time.
-	if (dstSetting.starts) {
+	if (localeSetting.starts) {
 		// Convert current time to UTC
 		let checkTime = new Date();
 		checkTime.setUTCHours(checkTime.getUTCHours() - offset);
 
-		let startTime = calculateDate(dstSetting.starts);
-		let endTime = calculateDate(dstSetting.ends);
+		let startTime = calculateDate(localeSetting.starts);
+		let endTime = calculateDate(localeSetting.ends);
 
 		if (startTime < endTime) {
 			if ((startTime < checkTime) && (checkTime < endTime)) {
-				dstOffset = dstSetting.offset || 1;
+				dstOffset = localeSetting.offset || 1;
 			}
 		} else if (startTime > endTime) {
 			if ((checkTime < endTime) || (checkTime > startTime)) {
-				dstOffset = dstSetting.offset || 1;
+				dstOffset = localeSetting.offset || 1;
 			}
 		}
 	}
