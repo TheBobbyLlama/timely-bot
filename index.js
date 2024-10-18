@@ -60,7 +60,7 @@ client.on("interactionCreate", async interaction => {
 		.addComponents(
 			new MessageSelectMenu()
 				.setCustomId("select2")
-				.setPlaceholder("Select Daylight Savings Type")
+				.setPlaceholder("Additional Locale Settings")
 				.addOptions(DST.map(ds => { return { label: ds.label, value: dstPrefix + ":" + ds.label, default: userTZ.dst === ds.label }}))
 		));
 
@@ -110,7 +110,7 @@ client.on("messageCreate", async message => {
 	try {
 		if (message.author.bot) return;
 
-		const finds = message.content.match(/`((([1-9]|1[0-9]|2[0-3])(:|.[0-5][0-9])?\s?[ap][m])|(([0-9]|1[0-9]|2[0-3]):[0-5][0-9]))( \(?[\w/-]+( [\w/-]+)*\)?)?`/gi);
+		const finds = message.content.match(/`((([1-9]|1[0-2])([:.][0-5][0-9])?\s?[ap][m])|(([0-9]|0[1-9]|1[0-2])[:.][0-5][0-9])|([0-1][0-9]|2[0-3])[0-5][0-9])( \(?[\w/-]+( [\w/-]+)*\)?)?`/gi);
 
 		// Keep going if we found any times.
 		if (finds?.length) {
@@ -213,11 +213,11 @@ const convertTime = (time, tzInfo) => {
 
 		if (startTime < endTime) {
 			if ((startTime < checkTime) && (checkTime < endTime)) {
-				dstOffset = 1;
+				dstOffset = dstSetting.offset || 1;
 			}
 		} else if (startTime > endTime) {
 			if ((checkTime < endTime) || (checkTime > startTime)) {
-				dstOffset = 1;
+				dstOffset = dstSetting.offset || 1;
 			}
 		}
 	}
@@ -226,8 +226,8 @@ const convertTime = (time, tzInfo) => {
 		ampm = "pm";
 	} else if (time.match(/am\b/i)) {
 		ampm = "am";
-	} else if (!time.endsWith("utc")) {
-		// Figure out whichever am or pm is next!!!
+	} else if (time.match(/:|\./)) {
+		// Figure out whichever am or pm is next (but not for 24 hour time)
 		let tmpDate = new Date();
 		tmpDate.setUTCMinutes(0, 0, 0);
 
@@ -246,10 +246,17 @@ const convertTime = (time, tzInfo) => {
 	// Finally, we can do the time conversion.
 	time = time.replace(/^([0-9:.]+).*$/, "$1");
 
-	let splits = time.split(":");
-
-	if (splits.length === 1) {
-		splits = splits[0].split(".");
+	let splits;
+	
+	if (time.indexOf(":") > -1) {
+		splits = time.split(":");
+	}
+	else if (time.indexOf(".") > -1) {
+		splits = time.split(".");
+	} else if (time.length == 4) {
+		splits = [time.substr(0, 2), time.substr(2, 2)];
+	} else {
+		return;
 	}
 
 	if (splits.length) {
@@ -266,6 +273,7 @@ const convertTime = (time, tzInfo) => {
 	result.setUTCHours(Number(splits[0]) - offset - dstOffset, splits[1] || 0, 0, 0);
 	return result;
 }
+
 
 const setStatus = () => {
 	const guildCount = client.guilds.cache.size;

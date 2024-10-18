@@ -15,15 +15,23 @@
 		<div id="server-status"></div>
 		<section>
 			<h2>What is Timely?</h2>
-			<p>
-				Timely is a <a href="https://discord.com/" target="_blank">Discord</a> bot for converting times for users across the world using Discord's <a href="https://hammertime.djdavid98.art/" target="_blank">timestamp</a> feature.  All you have to do to start using the bot is mark the time as code using backticks (<code>`</code>), and it will reply with the time converted into a timestamp that anyone will see in the proper local time.
-			</p>
-			<aside>
-				<div id="bot-demo"></div>
-			</aside>
-			<p>
-				The bot may be used without any other configuration if you supply local time information when writing a time - <i>e.g.</i> <code>3:30 PM EST</code>, <code>8:30 PDT</code>, <code>13:00 UTC</code>, <code>1AM (London)</code>, <code>12:30 Vancouver</code> and so on.  You can tag as many time entries as you like in a post and Timely will convert them all.
-			</p>
+			<ul>
+				<li>
+					Timely is a <a href="https://discord.com/" target="_blank">Discord</a> bot for converting times for users across the world using Discord's <a href="https://hammertime.djdavid98.art/" target="_blank">timestamp</a> feature.  All you have to do to start using the bot is mark the time as code using backticks (<code>`</code>), and it will reply with the time converted into a timestamp that anyone will see in the proper local time.
+				</li>
+				<li>
+					On a computer keyboard, the backtick is on the same key as tilde: <code>~</code>.  On a mobile device, it is typically accessed with a long press on apostrophe: <code>'</code>.
+					<aside>
+						<div id="bot-demo"></div>
+					</aside>
+				</li>
+				<li>
+					The bot may be used without any other configuration if you supply local time information when writing a time - <i>e.g.</i> <code>3:30 PM EST</code>, <code>8:30 pdt</code>, <code>1300 CET</code>, <code>7:30 UTC</code>, <code>1AM (London)</code>, <code>12:30 Vancouver</code> and so on.  You can tag as many time entries as you like in a post and Timely will convert them all.
+				</li>
+				<li>
+					Note that 24-hour time must be written in <b>####</b> format - <i>e.g.</i> <code>2200 est</code>
+				</li>
+			</ul>
 			<aside id="showHideHolder" class="hideMe">
 				<button type="button" id="showHide">Show Supported Local Times</button>
 			</aside>
@@ -244,8 +252,6 @@
 						<code title="Eastern European Summer Time">EEST</code>,
 						<code title="Eastern European Time">EET</code>,
 						<code title="Heure Avancée d'Europe Centrale">HAEC</code>,
-						<code title="Israel Daylight Time">IDT</code>,
-						<code title="Israel Standard Time">IST</code>,
 						<code title="Kaliningrad Time">KALT</code>,
 						<code title="South African Standard Time">SAST</code>,
 						<code title="West Africa Summer Time">WAST</code>,
@@ -277,6 +283,13 @@
 						<code>Turkey</code>,
 						<code>Moscow</code>,
 						<code>Riyadh</code>
+					</div>
+				</div>
+				<div>
+					<div><a href="https://en.wikipedia.org/wiki/UTC%2B03:30" target="_blank"><strong>IRST</strong> [UTC+3:30]</a></div>
+					<div>
+						<code title="Iran Standard Time">IRST</code>,
+						<code>Iran</code>
 					</div>
 				</div>
 				<div>
@@ -319,6 +332,21 @@
 					</div>
 				</div>
 				<div>
+					<div><a href="https://en.wikipedia.org/wiki/UTC%2B05:30" target="_blank"><strong>IST</strong> [UTC+5:30]</a></div>
+					<div>
+						<code title="India Standard Time">IST</code>,
+						<code>India</code>,
+						<code>Sri Lanka</code>
+					</div>
+				</div>
+				<div>
+					<div><a href="https://en.wikipedia.org/wiki/UTC%2B05:45" target="_blank"><strong>NPT</strong> [UTC+5:45]</a></div>
+					<div>
+						<code title="Nepal Standard Time">NPT</code>,
+						<code>Nepal</code>
+					</div>
+				</div>
+				<div>
 					<div><a href="https://en.wikipedia.org/wiki/UTC%2B06:00" target="_blank"><strong>F</strong> [UTC+6]</a></div>
 					<div>
 						<code>F</code>,
@@ -330,7 +358,16 @@
 						<code title="Vostok Station Time">VOST</code>,
 						<code>Almaty</code>,
 						<code>Dhaka</code>,
-						<code>Omsk</code>
+						<code>Omsk</code>,
+						<code>Urumqi</code>,
+						<code>Xinjiang</code>
+					</div>
+				</div>
+				<div>
+					<div><a href="https://en.wikipedia.org/wiki/UTC%2B06:30" target="_blank"><strong>MMT</strong> [UTC+6:30]</a></div>
+					<div>
+						<code title="Myanmar Standard Time">MMT</code>,
+						<code>Myanmar</code>
 					</div>
 				</div>
 				<div>
@@ -366,6 +403,8 @@
 						<code title="Singapore Time">SGT</code>,
 						<code title="Ulaanbaatar Standard Time">ULAT</code>,
 						<code title="Western Standard Time">WST</code>,
+						<code>Beijing</code>,
+						<code>China</code>,
 						<code>Hong Kong</code>,
 						<code>Irkutsk</code>,
 						<code>Kuala Lumpur</code>,

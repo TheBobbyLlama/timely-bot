@@ -178,7 +178,7 @@
 		"dst": "EU"
 	},
 	{
-		"keys": [ "idt", "ist", "israel", "jerusalem" ],
+		"keys": [ "israel", "jerusalem" ],
 		"timezone": "B",
 		"dst": "Israel"
 	},
@@ -186,6 +186,12 @@
 		"offset": 3,
 		"keys": [ "c", "eat", "fet", "iot", "msk", "syot", "trt", "addis ababa", "baghdad", "doha", "moscow", "riyadh" ],
 		"timezone": "C"
+	},
+	{
+		"offset": 3,
+		"keys": [ "irst", "iran" ],
+		"timezone": "C",
+		"dst": "+:30 (India, Iran, Myanmar, Sri Lanka)"
 	},
 	{
 		"keys": [ "istanbul", "turkey" ],
@@ -203,9 +209,27 @@
 		"timezone": "E"
 	},
 	{
+		"offset": 5,
+		"keys": [ "ist", "india", "sri lanka" ],
+		"timezone":  "E",
+		"dst": "+:30 (India, Iran, Myanmar, Sri Lanka)"
+	},
+	{
+		"offset": 5,
+		"keys": [ "npt", "nepal" ],
+		"timezone":  "E",
+		"dst": "+:45 (Nepal)"
+	},
+	{
 		"offset": 6,
-		"keys": [ "f", "almt", "biot", "btt", "kgt", "omst", "vost", "dhaka", "almaty", "omsk" ],
+		"keys": [ "f", "almt", "biot", "btt", "kgt", "omst", "vost", "dhaka", "almaty", "omsk", "urumqi", "xinjiang" ],
 		"timezone": "F"
+	},
+	{
+		"offset": 6,
+		"keys": [ "mmt", "myanmar" ],
+		"timezone": "F",
+		"dst": "+:30 (India, Iran, Myanmar, Sri Lanka)"
 	},
 	{
 		"offset": 7,
@@ -214,7 +238,7 @@
 	},
 	{
 		"offset": 8,
-		"keys": [ "h", "bnt", "chot", "hkt", "irkt", "myt", "pht", "phst", "sgt", "ulat", "hong kong", "irkutsk", "kuala lumpur", "makassar", "manila", "shanghai", "singapore", "taipei" ],
+		"keys": [ "h", "bnt", "chot", "hkt", "irkt", "myt", "pht", "phst", "sgt", "ulat", "beijing", "china", "hong kong", "irkutsk", "kuala lumpur", "makassar", "manila", "shanghai", "singapore", "taipei" ],
 		"timezone": "H"
 	},
 	{

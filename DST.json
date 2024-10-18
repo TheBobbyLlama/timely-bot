@@ -1,6 +1,6 @@
 [
 	{
-		"label": "No Daylight Savings Time"
+		"label": "(No additional settings)"
 	},
 	{
 		"label": "Australia",
@@ -210,6 +210,38 @@
 			"weekday": 0,
 			"dayCount": 1,
 			"time": 2
+		}
+	},
+	{
+		"label": "+:30 (India, Iran, Myanmar, Sri Lanka)",
+		"offset": 0.5,
+		"starts": {
+			"month": -1,
+			"weekday": 0,
+			"dayCount": 0,
+			"time": 0
+		},
+		"ends": {
+			"month": 99,
+			"weekday": 0,
+			"dayCount": 0,
+			"time": 0
+		}
+	},
+	{
+		"label": "+:45 (Nepal)",
+		"offset": 0.75,
+		"starts": {
+			"month": -1,
+			"weekday": 0,
+			"dayCount": 0,
+			"time": 0
+		},
+		"ends": {
+			"month": 99,
+			"weekday": 0,
+			"dayCount": 0,
+			"time": 0
 		}
 	}
 ]

@@ -137,12 +137,8 @@ li {
 	margin: 2px 0 2px 24px;
 }
 
-ol, ol + *, ul, ul + * {
+ol, ol + *, li + li, p + p, ul, ul + * {
 	margin-top: 10px;
-}
-
-p + p {
-	margin-top: 8px;
 }
 
 section {
@@ -235,7 +231,7 @@ section:hover h2::after {
 }
 
 #tzTable > div > *:first-child {
-	width: 120px;
+	width: 150px;
 }
 
 #tzTable > div > *:last-child {
