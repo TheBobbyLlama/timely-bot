@@ -23,7 +23,7 @@
 	{
 		"keys": [ "hdt", "hst", "hawaii" ],
 		"timezone": "W",
-		"dst": "US & Canada"
+		"dst": ""
 	},
 	{
 		"offset": -9,
