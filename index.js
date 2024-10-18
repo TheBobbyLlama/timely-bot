@@ -232,7 +232,11 @@ const convertTime = (time, tzInfo) => {
 		tmpDate.setUTCMinutes(0, 0, 0);
 
 		let inputHours = time.match(/^\d+/);
-		let curHours = tmpDate.getUTCHours() + offset;
+		let curHours = tmpDate.getUTCHours() + offset + dstOffset;
+
+		while(curHours < 1) {
+			curHours += 24;
+		}
 
 		if (inputHours) {
 			if ((curHours % 12) > inputHours[0]) {
@@ -253,10 +257,10 @@ const convertTime = (time, tzInfo) => {
 	}
 	else if (time.indexOf(".") > -1) {
 		splits = time.split(".");
-	} else if (time.length == 4) {
+	} else if (time.match(/^\d{4}$/)) {
 		splits = [time.substr(0, 2), time.substr(2, 2)];
 	} else {
-		return;
+		splits = time.match(/^\d+/);
 	}
 
 	if (splits.length) {
