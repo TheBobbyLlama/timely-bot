@@ -190,8 +190,8 @@ section:hover h2::after {
 
 #config-blank {
 	background-image: url('../images/config-blank.png');
-	height: 344px;
-	width: 1019px;
+	height: 326px;
+	width: 947px;
 }
 
 #server-status {
