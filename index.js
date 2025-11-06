@@ -201,31 +201,31 @@ const calculateDate = (dateInfo) => {
 const convertTime = (time, tzInfo) => {
 	let ampm;
 	const offset = timezones.find(tz => tz.value === tzInfo.timezone).offset || 0;
-	const myDST = tzInfo.dst || "";
-	const dstSetting = DST.find(ds => ds.label === myDST) || {};
+	const myLocale = tzInfo.dst || "";
+	const localeSetting = localeSettings.find(loc => loc.label === myLocale) || {};
 	let dstOffset = 0;
 	let dstMinutes = 0;
 
 	// Figure out if the input time is in daylight savings time.
-	if (dstSetting.starts) {
+	if (localSetting.starts) {
 		// Full-time offsets
-		if (dstSetting.starts.month < 0) {
-			dstMinutes = 60 * dstSetting.offset;
+		if (localSetting.starts.month < 0) {
+			dstMinutes = 60 * localSetting.offset;
 		} else {
 			// Convert current time to UTC
 			let checkTime = new Date();
 			checkTime.setUTCHours(checkTime.getUTCHours() - offset);
 
-			let startTime = calculateDate(dstSetting.starts);
-			let endTime = calculateDate(dstSetting.ends);
+			let startTime = calculateDate(localSetting.starts);
+			let endTime = calculateDate(localSetting.ends);
 
 			if (startTime < endTime) {
 				if ((startTime < checkTime) && (checkTime < endTime)) {
-					dstOffset = dstSetting.offset || 1;
+					dstOffset = localSetting.offset || 1;
 				}
 			} else if (startTime > endTime) {
 				if ((checkTime < endTime) || (checkTime > startTime)) {
-					dstOffset = dstSetting.offset || 1;
+					dstOffset = localSetting.offset || 1;
 				}
 			}
 		}
