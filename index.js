@@ -207,25 +207,25 @@ const convertTime = (time, tzInfo) => {
 	let dstMinutes = 0;
 
 	// Figure out if the input time is in daylight savings time.
-	if (localSetting.starts) {
+	if (localeSetting.starts) {
 		// Full-time offsets
-		if (localSetting.starts.month < 0) {
-			dstMinutes = 60 * localSetting.offset;
+		if (localeSetting.starts.month < 0) {
+			dstMinutes = 60 * localeSetting.offset;
 		} else {
 			// Convert current time to UTC
 			let checkTime = new Date();
 			checkTime.setUTCHours(checkTime.getUTCHours() - offset);
 
-			let startTime = calculateDate(localSetting.starts);
-			let endTime = calculateDate(localSetting.ends);
+			let startTime = calculateDate(localeSetting.starts);
+			let endTime = calculateDate(localeSetting.ends);
 
 			if (startTime < endTime) {
 				if ((startTime < checkTime) && (checkTime < endTime)) {
-					dstOffset = localSetting.offset || 1;
+					dstOffset = localeSetting.offset || 1;
 				}
 			} else if (startTime > endTime) {
 				if ((checkTime < endTime) || (checkTime > startTime)) {
-					dstOffset = localSetting.offset || 1;
+					dstOffset = localeSetting.offset || 1;
 				}
 			}
 		}
