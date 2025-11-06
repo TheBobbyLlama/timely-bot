@@ -290,7 +290,7 @@ const convertTime = (time, tzInfo) => {
 
 const setStatus = () => {
 	const guildCount = client.guilds.cache.size;
-	client.user.setActivity({ name:`the time on ${guildCount} servers`, type: "WATCHING" });
+	client.user.setActivity({ name:`Keeping time on ${guildCount} servers` });
 	database.ref("status/serverCount").set(guildCount);
 }
 
