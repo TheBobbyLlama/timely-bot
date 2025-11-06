@@ -1,13 +1,13 @@
 [
 	{
 		"offset": -12,
-		"keys": [ "y", "bit", "idlw" ],
+		"keys": [ "y", "utc-12", "gmt-12", "bit", "idlw" ],
 		"timezone": "Y",
 		"dst": ""
 	},
 	{
 		"offset": -11,
-		"keys": [ "x", "nut" ],
+		"keys": [ "x", "utc-11", "gmt-11", "nut" ],
 		"timezone": "X"
 	},
 	{
@@ -17,7 +17,7 @@
 	},
 	{
 		"offset": -10,
-		"keys": [ "w", "ckt", "taht" ],
+		"keys": [ "w", "utc-10", "gmt-10", "ckt", "taht" ],
 		"timezone": "W"
 	},
 	{
@@ -27,7 +27,7 @@
 	},
 	{
 		"offset": -9,
-		"keys": [ "v", "git" ],
+		"keys": [ "v", "utc-9", "gmt-9", "git" ],
 		"timezone": "V"
 	},
 	{
@@ -37,7 +37,7 @@
 	},
 	{
 		"offset": -8,
-		"keys": [ "u", "cist" ],
+		"keys": [ "u", "utc-8", "gmt-8", "cist" ],
 		"timezone": "U"
 	},
 	{
@@ -52,7 +52,7 @@
 	},
 	{
 		"offset": -7,
-		"keys": [ "t" ],
+		"keys": [ "t", "utc-7", "gmt-7" ],
 		"timezone": "T"
 	},
 	{
@@ -67,7 +67,7 @@
 	},
 	{
 		"offset": -6,
-		"keys": [ "s", "galt", "guatemala city", "tegucigalpa", "san josé", "san jose", "san salvador" ],
+		"keys": [ "s", "utc-6", "gmt-6", "galt", "guatemala city", "tegucigalpa", "san josé", "san jose", "san salvador" ],
 		"timezone": "S"
 	},
 	{
@@ -87,7 +87,7 @@
 	},
 	{
 		"offset": -5,
-		"keys": [ "r", "act", "cot", "ect", "pet", "lima", "bogotá", "bogota", "kingston", "quito" ],
+		"keys": [ "r", "utc-5", "gmt-5", "act", "cot", "ect", "pet", "lima", "bogotá", "bogota", "kingston", "quito" ],
 		"timezone": "R"
 	},
 	{
@@ -102,7 +102,7 @@
 	},
 	{
 		"offset": -4,
-		"keys": [ "q", "amt", "bot", "fkt", "gyt", "vet", "santo domingo", "manaus", "caracas", "la paz" ],
+		"keys": [ "q", "utc-4", "gmt-4", "amt", "bot", "fkt", "gyt", "vet", "santo domingo", "manaus", "caracas", "la paz" ],
 		"timezone": "Q"
 	},
 	{
@@ -122,7 +122,7 @@
 	},
 	{
 		"offset": -3,
-		"keys": [ "p", "adt", "amst", "art", "brt", "fkst", "gft", "rott", "uyt", "são paulo", "sao paulo", "buenos aires", "montevideo" ],
+		"keys": [ "p", "utc-3", "gmt-3", "adt", "amst", "art", "brt", "fkst", "gft", "rott", "uyt", "são paulo", "sao paulo", "buenos aires", "montevideo" ],
 		"timezone": "P"
 	},
 	{
@@ -132,12 +132,12 @@
 	},
 	{
 		"offset": -2,
-		"keys": [ "o", "brst", "fnt" ],
+		"keys": [ "o", "utc-2", "gmt-2", "brst", "fnt" ],
 		"timezone": "O"
 	},
 	{
 		"offset": -1,
-		"keys": [ "n", "azot", "cvt" ],
+		"keys": [ "n", "utc-1", "gmt-1", "azot", "cvt" ],
 		"timezone": "N"
 	},
 	{
@@ -148,7 +148,7 @@
 	},
 	{
 		"offset": 0,
-		"keys": [ "z", "utc", "zulu", "gmt", "azost", "abidjan", "accra", "dakar" ],
+		"keys": [ "z", "utc+0", "gmt+0", "utc", "zulu", "gmt", "azost", "abidjan", "accra", "dakar" ],
 		"timezone": "Z"
 	},
 	{
@@ -159,7 +159,7 @@
 	},
 	{
 		"offset": 1,
-		"keys": [ "a", "dft", "wat", "lagos", "kinshasa", "algiers", "casablanca" ],
+		"keys": [ "a", "utc+1", "gmt+1", "dft", "wat", "lagos", "kinshasa", "algiers", "casablanca" ],
 		"timezone": "A"
 	},
 	{
@@ -169,7 +169,7 @@
 	},
 	{
 		"offset": 2,
-		"keys": [ "b", "cat", "haec", "kalt", "sast", "wast", "cairo", "johannesburg", "khartoum", "kyiv" ],
+		"keys": [ "b", "utc+2", "gmt+2", "cat", "haec", "kalt", "sast", "wast", "cairo", "johannesburg", "khartoum", "kyiv" ],
 		"timezone": "B"
 	},
 	{
@@ -184,7 +184,7 @@
 	},
 	{
 		"offset": 3,
-		"keys": [ "c", "eat", "fet", "iot", "msk", "syot", "trt", "addis ababa", "baghdad", "doha", "moscow", "riyadh" ],
+		"keys": [ "c", "utc+3", "gmt+3", "eat", "fet", "iot", "msk", "syot", "trt", "addis ababa", "baghdad", "doha", "moscow", "riyadh" ],
 		"timezone": "C"
 	},
 	{
@@ -200,12 +200,12 @@
 	},
 	{
 		"offset": 4,
-		"keys": [ "d", "azt", "get", "gst", "mut", "ret", "samt", "sct", "volt", "baku", "dubai", "samara", "tbilisi", "yerevan" ],
+		"keys": [ "d", "utc+4", "gmt+4", "azt", "get", "gst", "mut", "ret", "samt", "sct", "volt", "baku", "dubai", "samara", "tbilisi", "yerevan" ],
 		"timezone": "D"
 	},
 	{
 		"offset": 5,
-		"keys": [ "e", "aqtt", "hmt", "mawt", "mvt", "orat", "pkt", "tft", "tjt", "tmt", "uzt", "yekt", "karachi", "tashkent", "yekaterinburg" ],
+		"keys": [ "e", "utc+5", "gmt+5", "aqtt", "hmt", "mawt", "mvt", "orat", "pkt", "tft", "tjt", "tmt", "uzt", "yekt", "karachi", "tashkent", "yekaterinburg" ],
 		"timezone": "E"
 	},
 	{
@@ -222,7 +222,7 @@
 	},
 	{
 		"offset": 6,
-		"keys": [ "f", "almt", "biot", "btt", "kgt", "omst", "vost", "dhaka", "almaty", "omsk", "urumqi", "xinjiang" ],
+		"keys": [ "f", "utc+6", "gmt+6", "almt", "biot", "btt", "kgt", "omst", "vost", "dhaka", "almaty", "omsk", "urumqi", "xinjiang" ],
 		"timezone": "F"
 	},
 	{
@@ -233,12 +233,12 @@
 	},
 	{
 		"offset": 7,
-		"keys": [ "g", "cxt", "davt", "hovt", "ict", "krat", "novt", "tha", "wib", "bangkok", "ho chi minh city", "jakarta", "krasnoyarsk" ],
+		"keys": [ "g", "utc+7", "gmt+7", "cxt", "davt", "hovt", "ict", "krat", "novt", "tha", "wib", "bangkok", "ho chi minh city", "jakarta", "krasnoyarsk" ],
 		"timezone": "G"
 	},
 	{
 		"offset": 8,
-		"keys": [ "h", "bnt", "chot", "hkt", "irkt", "myt", "pht", "phst", "sgt", "ulat", "beijing", "china", "hong kong", "irkutsk", "kuala lumpur", "makassar", "manila", "shanghai", "singapore", "taipei" ],
+		"keys": [ "h", "utc+8", "gmt+8", "bjt", "bnt", "chot", "hkt", "irkt", "myt", "pht", "phst", "sgt", "ulat", "beijing", "china", "hong kong", "irkutsk", "kuala lumpur", "makassar", "manila", "shanghai", "singapore", "taipei" ],
 		"timezone": "H"
 	},
 	{
@@ -248,12 +248,12 @@
 	},
 	{
 		"offset": 9,
-		"keys": [ "i", "chost", "jst", "kst", "pwt", "tlt", "wit", "yakt", "ambon", "chita", "pyongyang", "seoul", "tokyo" ],
+		"keys": [ "i", "utc+9", "gmt+9", "chost", "jst", "kst", "pwt", "tlt", "wit", "yakt", "ambon", "chita", "pyongyang", "seoul", "tokyo" ],
 		"timezone": "I"
 	},
 	{
 		"offset": 10,
-		"keys": [ "k", "chut", "ddut", "pgt", "vlat", "port moresby", "vladivostok" ],
+		"keys": [ "k", "utc+10", "gmt+10", "chut", "ddut", "pgt", "vlat", "port moresby", "vladivostok" ],
 		"timezone": "K"
 	},
 	{
@@ -263,12 +263,12 @@
 	},
 	{
 		"offset": 11,
-		"keys": [ "l", "kost", "lhst", "mist", "nct", "nft", "pont", "sakt", "sbt", "nouméa", "noumea" ],
+		"keys": [ "l", "utc+11", "gmt+11", "kost", "lhst", "mist", "nct", "nft", "pont", "sakt", "sbt", "nouméa", "noumea" ],
 		"timezone": "L"
 	},
 	{
 		"offset": 12,
-		"keys": [ "m", "anat", "fjt", "gilt", "magt", "mht", "pett", "tvt", "vut", "wakt", "suva", "petropavlovsk", "petropavlovsk-kamchatsky" ],
+		"keys": [ "m", "utc+12", "gmt+12", "anat", "fjt", "gilt", "magt", "mht", "pett", "tvt", "vut", "wakt", "suva", "petropavlovsk", "petropavlovsk-kamchatsky" ],
 		"timezone": "M"
 	},
 	{

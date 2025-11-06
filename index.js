@@ -110,7 +110,7 @@ client.on("messageCreate", async message => {
 	try {
 		if (message.author.bot) return;
 
-		const finds = message.content.match(/`((([1-9]|1[0-2])([:.][0-5][0-9])?\s?[ap][m])|(([0-9]|0[1-9]|1[0-2])[:.][0-5][0-9])|([0-1][0-9]|2[0-3])[0-5][0-9])( \(?[\w/-]+( [\w/-]+)*\)?)?`/gi);
+		const finds = message.content.match(/`((([1-9]|1[0-2])([:.][0-5][0-9])?\s?[ap]m)|(([0-9]|0[1-9]|1[0-2])[:.][0-5][0-9])|([0-1][0-9]|2[0-3])[0-5][0-9])( \(?[áàâãéèêìíîòóô\w]+(( [áàâãéèêìíîòóô\w]+)*|([-\+]([0-9]|1[0-2]))?)\)?)?`/gi);
 
 		// Keep going if we found any times.
 		if (finds?.length) {
@@ -120,10 +120,13 @@ client.on("messageCreate", async message => {
 			// Shift the times to UTC.
 			finds.forEach(time => {
 				let curTime = time.toLowerCase().replace(/`/g, "").replace(/\(/g, "").replace(/\)/g, "");
-				let curTZ = tzOverrides.find(tz => tz.keys.find(curKey => curTime.endsWith(" " + curKey))) || userTZ;
+				let curTZ = tzOverrides.find(tz => tz.keys.find(curKey => curTime.endsWith(" " + curKey)));
 
 				if (curTZ?.timezone) {
 					results.push([ time, convertTime(curTime, curTZ) ]);
+				// Convert with user's saved time zone if a 'bare' time was provided.
+				} else if ((userTZ?.timezone) && (curTime.match(/^((([1-9]|1[0-2])([:.][0-5][0-9])?\s?[ap]m)|(([0-9]|0[1-9]|1[0-2])[:.][0-5][0-9])|([0-1][0-9]|2[0-3])[0-5][0-9])$/))) {
+					results.push([ time, convertTime(curTime, userTZ)]);
 				}
 			});
 
@@ -156,15 +159,15 @@ const getUserInfo = async (userId) => {
 const calculateDate = (dateInfo) => {
 	let result = new Date();
 	result.setUTCHours(0, 0, 0, 0);
-	let maxDays = new Date(result.getUTCFullYear(), dateInfo.month + 1, 0).getDate();
+	let maxDays = new Date(result.getUTCFullYear(), dateInfo.month, 0).getDate();
 	let curDay = 0;
 	let dayHits = 0;
 
 	// Positive dayCount -> count from the beginning of the month.
 	if (dateInfo.dayCount > 0) {
-		result.setUTCMonth(dateInfo.month + 1);
+		result.setUTCMonth(dateInfo.month);
 
-		for (curDay = 0; curDay < maxDays; curDay++) {
+		for (curDay = 1; curDay < maxDays; curDay++) {
 			result.setUTCDate(curDay);
 
 			if (result.getUTCDay() === dateInfo.weekday) {
@@ -177,7 +180,7 @@ const calculateDate = (dateInfo) => {
 	} else if (dateInfo.dayCount < 0) {
 		result.setUTCMonth(dateInfo.month);
 
-		for (curDay = maxDays - 1; curDay >= 0; curDay--) {
+		for (curDay = maxDays; curDay >= 1; curDay--) {
 			result.setUTCDate(curDay);
 
 			if (result.getUTCDay() === dateInfo.weekday) {
@@ -198,26 +201,32 @@ const calculateDate = (dateInfo) => {
 const convertTime = (time, tzInfo) => {
 	let ampm;
 	const offset = timezones.find(tz => tz.value === tzInfo.timezone).offset || 0;
-	const myLocale = tzInfo.dst || "";
-	const localeSetting = localeSettings.find(loc => loc.label === myLocale) || {};
+	const myDST = tzInfo.dst || "";
+	const dstSetting = DST.find(ds => ds.label === myDST) || {};
 	let dstOffset = 0;
+	let dstMinutes = 0;
 
 	// Figure out if the input time is in daylight savings time.
-	if (localeSetting.starts) {
-		// Convert current time to UTC
-		let checkTime = new Date();
-		checkTime.setUTCHours(checkTime.getUTCHours() - offset);
+	if (dstSetting.starts) {
+		// Full-time offsets
+		if (dstSetting.starts.month < 0) {
+			dstMinutes = 60 * dstSetting.offset;
+		} else {
+			// Convert current time to UTC
+			let checkTime = new Date();
+			checkTime.setUTCHours(checkTime.getUTCHours() - offset);
 
-		let startTime = calculateDate(localeSetting.starts);
-		let endTime = calculateDate(localeSetting.ends);
+			let startTime = calculateDate(dstSetting.starts);
+			let endTime = calculateDate(dstSetting.ends);
 
-		if (startTime < endTime) {
-			if ((startTime < checkTime) && (checkTime < endTime)) {
-				dstOffset = localeSetting.offset || 1;
-			}
-		} else if (startTime > endTime) {
-			if ((checkTime < endTime) || (checkTime > startTime)) {
-				dstOffset = localeSetting.offset || 1;
+			if (startTime < endTime) {
+				if ((startTime < checkTime) && (checkTime < endTime)) {
+					dstOffset = dstSetting.offset || 1;
+				}
+			} else if (startTime > endTime) {
+				if ((checkTime < endTime) || (checkTime > startTime)) {
+					dstOffset = dstSetting.offset || 1;
+				}
 			}
 		}
 	}
@@ -274,7 +283,7 @@ const convertTime = (time, tzInfo) => {
 	}
 
 	let result = new Date();
-	result.setUTCHours(Number(splits[0]) - offset - dstOffset, splits[1] || 0, 0, 0);
+	result.setUTCHours(Number(splits[0]) - offset - dstOffset, (splits[1] || 0) - dstMinutes, 0, 0);
 	return result;
 }
 
