@@ -11,10 +11,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@discordjs/builders": "^0.12.0",
-    "@discordjs/rest": "^0.3.0",
-    "discord-api-types": "^0.26.1",
-    "discord.js": "^13.6.0",
+    "@discordjs/builders": "^1.14.1",
+    "@discordjs/rest": "^2.6.1",
+    "discord-api-types": "^0.38.48",
+    "discord.js": "^14.26.4",
     "dotenv": "^16.0.0",
     "firebase-admin": "^10.0.2"
   }

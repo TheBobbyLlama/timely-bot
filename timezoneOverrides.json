@@ -17,13 +17,13 @@
 	},
 	{
 		"offset": -10,
-		"keys": [ "w", "utc-10", "gmt-10", "ckt", "taht" ],
+		"keys": [ "w", "utc-10", "gmt-10", "ckt", "taht", "hawaii", "honolulu" ],
 		"timezone": "W"
 	},
 	{
-		"keys": [ "hdt", "hst", "hawaii" ],
+		"keys": [ "hdt", "hst" ],
 		"timezone": "W",
-		"dst": ""
+		"dst": "US & Canada"
 	},
 	{
 		"offset": -9,
@@ -52,7 +52,7 @@
 	},
 	{
 		"offset": -7,
-		"keys": [ "t", "utc-7", "gmt-7" ],
+		"keys": [ "t", "utc-7", "gmt-7", "arizona", "phoenix" ],
 		"timezone": "T"
 	},
 	{
